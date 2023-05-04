@@ -7,6 +7,11 @@ If you just run it without changing anything, it won't do anything.
 ...For now, at least.
 Contributions and bug/issue-reporting are welcome and appreciated.
 
+# Compatibility
+
+This program was only tested with the "legacy" Steam PC version of the game.
+IT *MAY OR MAY NOT* WORK WITH THE V3 ANNIVERSARY EDITION SAVEFILES.
+
 # How-to-use
 
 Don't edit/use this program unless you know what you're doing, as your save files may corrupt. You have been warned.
