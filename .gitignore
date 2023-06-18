@@ -25,3 +25,5 @@ V3SaveManager/V3SaveManager.csproj.user
 *.lock
 V3SaveManagerGUI/obj/*
 V3SaveManagerGUI/V3SaveManagerGUI.csproj.user
+*.1
+*.v2
