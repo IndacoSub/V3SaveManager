@@ -21,3 +21,7 @@ V3SaveManager/obj/Debug/net6.0/V3SaveManager.GlobalUsings.g.cs
 *.dat
 V3SaveManager/V3SaveManager.csproj.user
 *.bak
+*.vsidx
+*.lock
+V3SaveManagerGUI/obj/*
+V3SaveManagerGUI/V3SaveManagerGUI.csproj.user
