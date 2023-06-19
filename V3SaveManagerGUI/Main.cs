@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using V3SaveManagerGUI.Editors;
 
 namespace V3SaveManagerGUI
@@ -19,6 +20,8 @@ namespace V3SaveManagerGUI
 			None,
 			Monocoins,
 			Playtime,
+			Flags,
+			Level_and_EXP,
 			Num,
 		}
 
@@ -26,9 +29,11 @@ namespace V3SaveManagerGUI
 		{
 			this.EditListComboBox.Items.Clear();
 
-			for(int i = (int)Editable.None + 0; i < (int)Editable.Num; i++)
+			for (int i = (int)Editable.None + 0; i < (int)Editable.Num; i++)
 			{
-				this.EditListComboBox.Items.Add((Editable)i);
+				string item = ((Editable)i).ToString();
+				item = item.Replace("_", " ");
+				this.EditListComboBox.Items.Add(item);
 			}
 		}
 
@@ -54,8 +59,52 @@ namespace V3SaveManagerGUI
 				case Editable.Playtime:
 					EditPlaytime();
 					break;
+				case Editable.Flags:
+					EditFlags();
+					break;
+				case Editable.Level_and_EXP:
+					EditLevelAndEXP();
+					break;
 				default:
 					break;
+			}
+		}
+
+		private void EditLevelAndEXP()
+		{
+			string current_level = BitConverter.ToInt32(CurrentSaveFile.CurrentLevel).ToString();
+			string current_level_short = BitConverter.ToInt16(CurrentSaveFile.CurrentLevelShort).ToString();
+			if (current_level != current_level_short)
+			{
+				Debug.WriteLine("...Invalid current level?");
+			}
+			string total_exp = BitConverter.ToInt32(CurrentSaveFile.TotalEXP).ToString();
+			LevelEditor le = new LevelEditor();
+			le.CurrentLevelLabel.Text = "Current Level: " + current_level;
+			le.CurrentTotalEXPLabel.Text = "Current Total EXP: " + total_exp;
+			le.NewLevelTextbox.Text = current_level;
+			le.NewTotalEXPTextbox.Text = total_exp;
+			le.DesiredLevelTextbox.Text = current_level;
+			le.CalculateEXP();
+			var res = le.ShowDialog();
+			if (res == DialogResult.OK)
+			{
+				CurrentSaveFile.CurrentLevel = BitConverter.GetBytes(int.Parse(le.NewLevelTextbox.Text));
+				CurrentSaveFile.CurrentLevelShort = BitConverter.GetBytes(short.Parse(le.NewLevelTextbox.Text));
+				CurrentSaveFile.TotalEXP = BitConverter.GetBytes(int.Parse(le.NewTotalEXPTextbox.Text));
+			}
+		}
+
+		private void EditFlags()
+		{
+			string clear_game = BitConverter.ToInt16(CurrentSaveFile.GameClearFlg).ToString();
+			FlagEditor fe = new FlagEditor();
+			fe.CurrentGameClearFlgLabel.Text = "Current GameClearFlg: " + (clear_game == "1" ? "On" : "Off");
+			fe.GameClearFlgCheckbox.Checked = clear_game == "1";
+			var res = fe.ShowDialog();
+			if (res == DialogResult.OK)
+			{
+				CurrentSaveFile.GameClearFlg = BitConverter.GetBytes((short)(fe.GameClearFlgCheckbox.Checked ? 1 : 0));
 			}
 		}
 
@@ -84,17 +133,17 @@ namespace V3SaveManagerGUI
 			PlaytimeEditor pe = new PlaytimeEditor();
 			pe.CurrentPlaytimeLabel.Text = "Current playtime (in frames):\n" + current;
 			pe.NewPlaytimeTextbox.Text = current;
-			while(frames >= framerate)
+			while (frames >= framerate)
 			{
 				seconds++;
 				frames -= framerate;
 			}
-			while(seconds >= 60)
+			while (seconds >= 60)
 			{
 				minutes++;
 				seconds -= 60;
 			}
-			while(minutes >= 60)
+			while (minutes >= 60)
 			{
 				hours++;
 				minutes -= 60;
