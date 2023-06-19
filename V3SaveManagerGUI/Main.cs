@@ -18,14 +18,18 @@ namespace V3SaveManagerGUI
 		{
 			None,
 			Monocoins,
+			Playtime,
+			Num,
 		}
 
 		private void LoadCombobox()
 		{
 			this.EditListComboBox.Items.Clear();
 
-			this.EditListComboBox.Items.Add(Editable.None.ToString());
-			this.EditListComboBox.Items.Add(Editable.Monocoins.ToString());
+			for(int i = (int)Editable.None + 0; i < (int)Editable.Num; i++)
+			{
+				this.EditListComboBox.Items.Add((Editable)i);
+			}
 		}
 
 		private void EditListComboBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -47,6 +51,11 @@ namespace V3SaveManagerGUI
 				case Editable.Monocoins:
 					EditMonocoins();
 					break;
+				case Editable.Playtime:
+					EditPlaytime();
+					break;
+				default:
+					break;
 			}
 		}
 
@@ -60,6 +69,46 @@ namespace V3SaveManagerGUI
 			if (res == DialogResult.OK)
 			{
 				CurrentSaveFile.Monocoins = BitConverter.GetBytes(short.Parse(me.NewMonocoinsTextbox.Text));
+			}
+		}
+
+		private void EditPlaytime()
+		{
+			const int framerate = 60;
+			long frames_count = BitConverter.ToInt64(CurrentSaveFile.PlayTime);
+			long seconds = 0;
+			long hours = 0;
+			long minutes = 0;
+			long frames = frames_count;
+			string current = frames_count.ToString();
+			PlaytimeEditor pe = new PlaytimeEditor();
+			pe.CurrentPlaytimeLabel.Text = "Current playtime (in frames):\n" + current;
+			pe.NewPlaytimeTextbox.Text = current;
+			while(frames >= framerate)
+			{
+				seconds++;
+				frames -= framerate;
+			}
+			while(seconds >= 60)
+			{
+				minutes++;
+				seconds -= 60;
+			}
+			while(minutes >= 60)
+			{
+				hours++;
+				minutes -= 60;
+			}
+
+			pe.HoursTextbox.Text = hours.ToString();
+			pe.MinutesTextbox.Text = minutes.ToString();
+			pe.SecondsTextbox.Text = seconds.ToString();
+			pe.FramesTextbox.Text = frames.ToString();
+
+			var res = pe.ShowDialog();
+			if (res == DialogResult.OK)
+			{
+				CurrentSaveFile.PlayTime = BitConverter.GetBytes(long.Parse(pe.NewPlaytimeTextbox.Text));
 			}
 		}
 

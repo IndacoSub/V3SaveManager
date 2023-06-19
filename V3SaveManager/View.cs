@@ -23,7 +23,7 @@ namespace V3SaveManager
 			Console.WriteLine("Unk6: " + BitConverter.ToInt32(this.Unk60));
 			Console.WriteLine("Unk7: " + BitConverter.ToInt32(this.Unk7));
 			Console.WriteLine("Unk8: " + BitConverter.ToInt32(this.Unk8));
-			Console.WriteLine("PlayTime: " + BitConverter.ToInt64(this.PlayTime));
+			Console.WriteLine("PlayTime: " + BitConverter.ToInt64(this.PlayTime));	// ulong or long?
 			Console.WriteLine("Unk9: " + BitConverter.ToInt64(this.Unk9));
 			//Console.WriteLine("ToDo1: [TODO]");
 			Console.WriteLine("BGM Volume: " + BitConverter.ToInt16(this.BGMVolume));
