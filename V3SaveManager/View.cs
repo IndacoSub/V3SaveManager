@@ -1,162 +1,145 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
+using System.Diagnostics;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace V3SaveManager
 {
 	public partial class Savefile
 	{
-		public void ViewSave()
+		public void NewViewSave()
 		{
-			Console.WriteLine("Game name: " + BytesToString(this.GameName));
-			Console.WriteLine("Chapter name: " + BytesToString(this.ChapterName));
-			Console.WriteLine("Save details: " + BytesToString(this.SaveDetails));
-			Console.WriteLine("New savedata: " + BytesToString(this.NewSaveData));
-			Console.WriteLine("Unk1: " + BitConverter.ToInt32(this.Unk1));
-			Console.WriteLine("Unk2: " + BitConverter.ToInt32(this.Unk2));
-			Console.WriteLine("Unk3: " + BitConverter.ToInt32(this.Unk3));
-			Console.WriteLine("Unk4: " + BitConverter.ToInt32(this.Unk4));
-			Console.WriteLine("Monocoins: " + BitConverter.ToInt16(this.Monocoins));
-			Console.WriteLine("Unk5: " + BitConverter.ToInt16(this.Unk5));
-			Console.WriteLine("Unk6: " + BitConverter.ToInt32(this.Unk60));
-			Console.WriteLine("Unk7: " + BitConverter.ToInt32(this.Unk7));
-			Console.WriteLine("Unk8: " + BitConverter.ToInt32(this.Unk8));
-			Console.WriteLine("PlayTime: " + BitConverter.ToInt64(this.PlayTime));	// ulong or long?
-			Console.WriteLine("Unk9: " + BitConverter.ToInt64(this.Unk9));
-			//Console.WriteLine("ToDo1: [TODO]");
-			Console.WriteLine("BGM Volume: " + BitConverter.ToInt16(this.BGMVolume));
-			Console.WriteLine("SFX Volume: " + BitConverter.ToInt16(this.SFXVolume));
-			Console.WriteLine("Voices Volume: " + BitConverter.ToInt16(this.VoicesVolume));
-			Console.WriteLine("Reticle Speed: " + BitConverter.ToInt16(this.ReticleSpeed));
-			Console.WriteLine("Movement bob: " + BitConverter.ToBoolean(this.MovementBob));
-			Console.WriteLine("Shooter controls: " + BitConverter.ToBoolean(this.Controls));
-			Console.WriteLine("Look Invert: " + BitConverter.ToBoolean(this.LookInvert));
-			Console.WriteLine("Text Speed: " + BitConverter.ToInt16(this.ReticleSpeed));
-			Console.WriteLine("Map Display (moving minimap): " + BitConverter.ToInt16(this.MapDisplay));
-			Console.WriteLine("Setting 1: " + BitConverter.ToInt16(this.Setting1));
-			Console.WriteLine("Logic Difficulty: " + BitConverter.ToInt16(this.LogicDifficulty));
-			Console.WriteLine("Action Difficulty: " + BitConverter.ToInt16(this.ActionDifficulty));
-			Console.WriteLine("Continue button enabled: " + BitConverter.ToInt16(this.IsContinueEnabled));
-			Console.WriteLine("Game Clear Flag: " + BitConverter.ToInt16(this.GameClearFlg));
-			//Console.WriteLine("ToDo2: [TODO]");
-			Console.WriteLine("Unk10: " + BitConverter.ToInt32(this.Unk10));
-			Console.WriteLine("Current Level: " + BitConverter.ToInt32(this.CurrentLevel));
-			Console.WriteLine("Total EXP: " + BitConverter.ToInt32(this.TotalEXP));
-			Console.WriteLine("Un11: " + BitConverter.ToInt32(this.Unk11));
-			Console.WriteLine("Unk12: " + BitConverter.ToInt32(this.Unk12));
-			Console.WriteLine("Current Level (short): " + BitConverter.ToInt16(this.CurrentLevelShort));
-			Console.WriteLine("Unk13: " + BitConverter.ToInt16(this.Unk13));
-			//Console.WriteLine("Unk14: [TODO]");
-			Console.WriteLine("Map Position (X): " + BitConverter.ToSingle(this.MapPositionX));
-			Console.WriteLine("Map Position (Y): " + BitConverter.ToSingle(this.MapPositionY));
-			Console.WriteLine("Unk15: " + BitConverter.ToInt32(this.Unk15));
-			//Console.WriteLine("ToDo3: [TODO]");
-			Console.WriteLine("IsStatusAlive: " + BitConverter.ToInt32(this.IsStatusAlive));
-			Console.WriteLine("IsStatusUnknown:" + BitConverter.ToInt32(this.IsStatusUnknown));
-			//Console.WriteLine("ToDo4: [TODO]");
-			Console.WriteLine("Monopad theme: " + BitConverter.ToInt32(this.MonopadTheme));
-			//Console.WriteLine("BeforeText: [TODO]");
-			Console.WriteLine("Backlog text begin: " + GetBeginningOfString(BytesToString(this.BacklogText)));
-			Console.WriteLine("Backlog text end: " + GetEndOfString(BytesToString(this.BacklogText)));
-			//Console.WriteLine("ToDo5: [TODO]");
-			Console.WriteLine("Casino coins: " + BitConverter.ToInt32(this.CasinoCoins));
-			Console.WriteLine("Unk16: " + BitConverter.ToInt32(this.Unk14));
-			Console.WriteLine("GDeathCardMachine: " + BitConverter.ToInt32(this.GDeathCardMachine));
-			//Console.WriteLine("Unk17: [TODO]");
-			//Console.WriteLine("Unk18: [TODO]");
-			//Console.WriteLine("Unk19: [TODO]");
-			//Console.WriteLine("Unk20: [TODO]");
-			//Console.WriteLine("Unk21: [TODO]");
-			//Console.WriteLine("Unk22: [TODO]");
-			//Console.WriteLine("Unk23: [TODO]");
-			//Console.WriteLine("Unk24: [TODO]");
-			//Console.WriteLine("Unk25: [TODO]");
-			//Console.WriteLine("Unk26: [TODO]");
-			//Console.WriteLine("Unk27: [TODO]");
-			//Console.WriteLine("Unk28: [TODO]");
-			Console.WriteLine("Unk29: " + BitConverter.ToInt32(this.Unk29));
-			Console.WriteLine("Unk30: " + BitConverter.ToInt32(this.Unk30));
-			Console.WriteLine("Unk31: " + BitConverter.ToInt32(this.Unk31));
-			Console.WriteLine("WRD Archive: " + BytesToString(this.WRDArchive));
-			Console.WriteLine("Subroutine Archive: " + BytesToString(this.SubroutineArchive));
-			//Console.WriteLine("Unk32: [TODO]");
-			//Console.WriteLine("Unk33: [TODO]");
-			//Console.WriteLine("Unk34: [TODO]");
-			Console.WriteLine("WRD File: " + BytesToString(this.WRDFile));
-			Console.WriteLine("Subroutine WRD: " + BytesToString(this.SubroutineWRD));
-			//Console.WriteLine("Unk35: [TODO]");
-			//Console.WriteLine("Unk36: [TODO]");
-			//Console.WriteLine("Unk37: [TODO]");
-			Console.WriteLine("Text archive: " + BytesToString(this.TextArchive));
-			Console.WriteLine("Subroutine text archive: " + BytesToString(this.SubroutineTextArchive));
-			//Console.WriteLine("Unk38: [TODO]");
-			//Console.WriteLine("Unk39: [TODO]");
-			//Console.WriteLine("Unk40: [TODO]");
-			Console.WriteLine("Text STX: " + BytesToString(this.TextSTX));
-			Console.WriteLine("Subroutine STX: " + BytesToString(this.SubroutineSTX));
-			//Console.WriteLine("Unk41: [TODO]");
-			//Console.WriteLine("Unk42: [TODO]");
-			//Console.WriteLine("Unk43: [TODO]");
-			Console.WriteLine("WRD Map: " + BytesToString(this.WRDMap));
-			//Console.WriteLine("Unk44: [TODO]");
-			//Console.WriteLine("Unk45: [TODO]");
-			//Console.WriteLine("Unk46: [TODO]");
-			Console.WriteLine("Unk47: " + BitConverter.ToInt32(this.Unk47));
-			Console.WriteLine("BGMIndex: " + BitConverter.ToInt32(this.BGMIndex));
-			Console.WriteLine("Unk48: " + BitConverter.ToInt16(this.Unk48));
-			Console.WriteLine("Unk49: " + BitConverter.ToInt16(this.Unk49));
-			Console.WriteLine("Current BGM: " + BytesToString(this.CurrentBGM));
-			//Console.WriteLine("Unk50: [TODO]");
-			Console.WriteLine("Current SFX: " + BytesToString(this.CurrentSFX));
-			//Console.WriteLine("Unk51: [TODO]");
-			//Console.WriteLine("Unk52: [TODO]");
-			//Console.WriteLine("Unk53: [TODO]");
-			Console.WriteLine("Current Line: " + BitConverter.ToInt32(this.CurrentLine));
-			//Console.WriteLine("Unk54: [TODO]");
-			Console.WriteLine("Unk55: " + BitConverter.ToInt32(this.Unk55));
-			Console.WriteLine("Unk56: " + BitConverter.ToInt32(this.Unk56));
-			Console.WriteLine("Unk57: " + BitConverter.ToInt32(this.Unk57));
-			Console.WriteLine("Unk58: " + BitConverter.ToInt32(this.Unk58));
-			Console.WriteLine("Unk59: " + BitConverter.ToInt32(this.Unk59));
-			Console.WriteLine("Unk60: " + BitConverter.ToInt32(this.Unk60));
-			//Console.WriteLine("Unk61: [TODO]");
-			Console.WriteLine("Voiceline 1: " + BytesToString(this.Voiceline1));
-			Console.WriteLine("Voiceline 2: " + BytesToString(this.Voiceline2));
-			Console.WriteLine("Voiceline 3: " + BytesToString(this.Voiceline3));
-			Console.WriteLine("Voiceline 4: " + BytesToString(this.Voiceline4));
-			Console.WriteLine("Voiceline 5: " + BytesToString(this.Voiceline5));
-			Console.WriteLine("Voiceline 6: " + BytesToString(this.Voiceline6));
-			Console.WriteLine("Voiceline 7: " + BytesToString(this.Voiceline7));
-			Console.WriteLine("Voiceline 8: " + BytesToString(this.Voiceline8));
-			Console.WriteLine("Voiceline 9: " + BytesToString(this.Voiceline9));
-			Console.WriteLine("Voiceline 10: " + BytesToString(this.Voiceline10));
-			Console.WriteLine("Voiceline 11: " + BytesToString(this.Voiceline11));
-			Console.WriteLine("Voiceline 12: " + BytesToString(this.Voiceline12));
-			Console.WriteLine("Voiceline 13: " + BytesToString(this.Voiceline13));
-			Console.WriteLine("Voiceline 14: " + BytesToString(this.Voiceline14));
-			Console.WriteLine("Voiceline 15: " + BytesToString(this.Voiceline15));
-			Console.WriteLine("Voiceline 16: " + BytesToString(this.Voiceline16));
-#if DEBUG
-			//Console.WriteLine("[DEBUG ONLY] Voiceline 17: " + BytesToString(this.DEBUG_VoiceLine17));
-			//Console.WriteLine("[DEBUG ONLY] Voiceline 18: " + BytesToString(this.DEBUG_VoiceLine18));
-			//Console.WriteLine("[DEBUG ONLY] Voiceline 19: " + BytesToString(this.DEBUG_VoiceLine19));
-#endif
-			//Console.WriteLine("Unk62: [TODO]");
-			//Console.WriteLine("Unk63: [TODO]");
-			//Console.WriteLine("Unk64: [TODO]");
-			//Console.WriteLine("Unk65: [TODO]");
-			//Console.WriteLine("Unk66: [TODO]");
-			//Console.WriteLine("Unk67: [TODO]");
-			Console.WriteLine("Voice Language English: " + BitConverter.ToBoolean(this.VoiceLanguage));
-			Console.WriteLine("Setting 2: " + BitConverter.ToInt32(this.Setting2));
-			Console.WriteLine("Invert X-Axis: " + BitConverter.ToInt32(this.InvertX));
-			Console.WriteLine("Date format: " + BitConverter.ToInt32(this.DateFormat));
-			Console.WriteLine("Unk68: " + BitConverter.ToInt32(this.Unk68));
-			Console.WriteLine("Unk69: " + BitConverter.ToInt32(this.Unk69));
-			//Console.WriteLine("Unk70: [TODO]");
-			Console.WriteLine("Last bytes: " + BitConverter.ToInt32(this.LastBytes));
+			// NOTE: MIGHT NOT BE ACCURATE
+			// STICK WITH THE "DOCUMENTATION" IN SAVEFILE.CS
+
+			ViewValue(this.GameName, "GameName", "string");
+			ViewValue(this.ChapterName, "ChapterName", "string");
+			ViewValue(this.SaveDetails, "SaveDetails", "string");
+			ViewValue(this.NewSaveData, "NewSaveData", "string");
+			ViewValue(this.Monocoins, "Monocoins", "short");
+			ViewValue(this.PlayTime, "PlayTime", "long");
+			ViewValue(this.BGMVolume, "BGMVolume", "short");
+			ViewValue(this.SFXVolume, "SFXVolume", "short");
+			ViewValue(this.VoicesVolume, "VoicesVolume", "short");
+			ViewValue(this.ReticleSpeed, "ReticleSpeed", "short");
+			ViewValue(this.MovementBob, "MovementBob", "Boolean");
+			ViewValue(this.Controls, "Controls", "Boolean");
+			ViewValue(this.LookInvert, "LookInvert", "Boolean");
+			ViewValue(this.TextSpeed, "TextSpeed", "short");
+			ViewValue(this.MapDisplay, "MapDisplay", "short");
+			ViewValue(this.Setting1, "Setting1", "short");
+			ViewValue(this.LogicDifficulty, "LogicDifficulty", "short");
+			ViewValue(this.ActionDifficulty, "ActionDifficulty", "short");
+			ViewValue(this.IsContinueEnabled, "IsContinueEnabled", "short");
+			ViewValue(this.GameClearFlg, "GameClearFlg", "short");
+			ViewValue(this.CurrentLevel, "CurrentLevel", "int");
+			ViewValue(this.TotalEXP, "TotalEXP", "int");
+			ViewValue(this.CurrentLevelShort, "CurrentLevelShort", "short");
+			ViewValue(this.MapPositionX, "MapPositionX", "Float");
+			ViewValue(this.MapPositionY, "MapPositionY", "Float");
+			ViewValue(this.IsStatusAlive, "IsStatusAlive", "int");
+			ViewValue(this.MonopadTheme, "MonopadTheme", "int");
+			ViewValue(this.BacklogText, "BacklogText", "BeginString");
+			ViewValue(this.CasinoCoins, "CasinoCoins", "int");
+			ViewValue(this.GDeathCardMachine, "GDeathCardMachine", "int");
+			ViewValue(this.WRDArchive, "WRDArchive", "string");
+			ViewValue(this.SubroutineArchive, "SubroutineArchive", "string");
+			ViewValue(this.WRDFile, "WRDFile", "string");
+			ViewValue(this.SubroutineWRD, "SubroutineWRD", "string");
+			ViewValue(this.TextArchive, "TextArchive", "string");
+			ViewValue(this.SubroutineTextArchive, "SubroutineTextArchive", "string");
+			ViewValue(this.TextSTX, "TextSTX", "string");
+			ViewValue(this.SubroutineSTX, "SubroutineSTX", "string");
+			ViewValue(this.WRDMap, "WRDMap", "string");
+			ViewValue(this.CurrentMapID, "CurrentMapID", "short");
+			ViewValue(this.BGMIndex, "BGMIndex", "int");
+			ViewValue(this.CurrentBGM, "CurrentBGM", "string");
+			ViewValue(this.CurrentSFX, "CurrentSFX", "string");
+			ViewValue(this.CurrentLine, "CurrentLine", "int");
+			ViewValue(this.Voiceline1, "Voiceline1", "string");
+			ViewValue(this.Voiceline2, "Voiceline2", "string");
+			ViewValue(this.Voiceline3, "Voiceline3", "string");
+			ViewValue(this.Voiceline4, "Voiceline4", "string");
+			ViewValue(this.Voiceline5, "Voiceline5", "string");
+			ViewValue(this.Voiceline6, "Voiceline6", "string");
+			ViewValue(this.Voiceline7, "Voiceline7", "string");
+			ViewValue(this.Voiceline8, "Voiceline8", "string");
+			ViewValue(this.Voiceline9, "Voiceline9", "string");
+			ViewValue(this.Voiceline10, "Voiceline10", "string");
+			ViewValue(this.Voiceline11, "Voiceline11", "string");
+			ViewValue(this.Voiceline12, "Voiceline12", "string");
+			ViewValue(this.Voiceline13, "Voiceline13", "string");
+			ViewValue(this.Voiceline14, "Voiceline14", "string");
+			ViewValue(this.Voiceline15, "Voiceline15", "string");
+			ViewValue(this.Voiceline16, "Voiceline16", "string");
+			ViewValue(this.CurrentMapID_Again, "CurrentMapID_Again", "short");
+			ViewValue(this.VoiceLanguageEnglish, "VoiceLanguageEnglish", "Boolean");
+			ViewValue(this.Setting2, "Setting2", "int");
+			ViewValue(this.InvertX, "InvertX", "int");
+			ViewValue(this.DateFormat, "DateFormat", "int");
+			ViewValue(this.LastBytes, "LastBytes", "int");
+		}
+
+		private void ViewValue(byte[] value, string name, string type)
+		{
+			if(type == null)
+			{
+				Console.WriteLine("Type is null!");
+				return;
+			}
+
+			const bool include_info = false;
+			if (include_info)
+			{
+				Console.Write("[" + type + " | " + value.Length + " | 0x" + value.Length.ToString("X") + "] ");
+			}
+
+			switch(type.ToLowerInvariant())
+			{
+				case "boolean":
+				case "bool":
+					Assert(value.Length == sizeof(Boolean) && value.Length == sizeof(bool), name + " is NOT a bool");
+					Console.WriteLine(name + ": " + BitConverter.ToBoolean(value));
+					break;
+				case "int16":
+				case "short":
+					Assert(value.Length == sizeof(Int16) && value.Length == sizeof(short), name + " is NOT an int16");
+					Console.WriteLine(name + ": " + BitConverter.ToInt16(value));
+					break;
+				case "int32":
+				case "int":
+					Assert(value.Length == sizeof(Int32) && value.Length == sizeof(int), name + " is NOT an int32");
+					Console.WriteLine(name + ": " + BitConverter.ToInt32(value));
+					break;
+				case "long":
+				case "int64":
+					Assert(value.Length == sizeof(Int64) && value.Length == sizeof(long), name + " is NOT a long");
+					Console.WriteLine(name + ": " + BitConverter.ToInt64(value));
+					break;
+				case "beginstring":
+					Console.WriteLine(name + ": " + GetBeginningOfString(BytesToString(value)));
+					break;
+				case "endstring":
+					Console.WriteLine(name + ": " + GetEndOfString(BytesToString(value)));
+					break;
+				case "string":
+					Console.WriteLine(name + ": " + BytesToString(value, true, true));
+					break;
+				case "float":
+					Console.WriteLine(name + ": " + BitConverter.ToSingle(value));
+					break;
+				case "double":
+					Console.WriteLine(name + ": " + BitConverter.ToDouble(value));
+					break;
+				default:
+					Assert(false, "Unknown type: " + type);
+					break;
+			}
 		}
 	}
 }

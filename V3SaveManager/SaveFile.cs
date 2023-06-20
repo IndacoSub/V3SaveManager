@@ -109,8 +109,9 @@ namespace V3SaveManager
 		public byte[] WRDMap = new byte[0x40];                  // 0x30A3C -> 0x30A7B
 		public byte[] Unk44 = new byte[0x100];                  // 0x30A7C -> 0x30B7B
 		public byte[] Unk45 = new byte[0x80];                   // 0x30B7C -> 0x30BFB
-		public byte[] Unk46 = new byte[0x10E4];                 // 0x30BFC -> 0x31CDF
-		public byte[] Unk47 = new byte[4];                      // 0x31CE0
+		public byte[] Unk46 = new byte[0x1004];                 // 0x30BFC -> 0x31BFF
+		public byte[] CurrentMapID = new byte[2];				// 0x31C00
+		public byte[] Unk47 = new byte[0xE2];                   // 0x31C02 -> 0x31CE3
 		public byte[] BGMIndex = new byte[4];                   // 0x31CE4
 		public byte[] Unk48 = new byte[2];                      // 0x31CE8
 		public byte[] Unk49 = new byte[2];                      // 0x31CEA
@@ -145,18 +146,14 @@ namespace V3SaveManager
 		public byte[] Voiceline14 = new byte[0x40];             //
 		public byte[] Voiceline15 = new byte[0x40];             //
 		public byte[] Voiceline16 = new byte[0x40];             // 0x32454
-#if DEBUG
-		public byte[] DEBUG_VoiceLine17 = new byte[0x40];       // ONLY FOR DEBUGGING, IT'S NOT IN THE SAVEFILE
-		public byte[] DEBUG_VoiceLine18 = new byte[0x40];       // ONLY FOR DEBUGGING, IT'S NOT IN THE SAVEFILE
-		public byte[] DEBUG_VoiceLine19 = new byte[0x40];       // ONLY FOR DEBUGGING, IT'S NOT IN THE SAVEFILE
-#endif
 		public byte[] Unk62 = new byte[0x4C];                   // 0x32494 -> 0x324DF
 		public byte[] Unk63 = new byte[0x10D0];                 // 0x324E0 -> 0x335AF
 		public byte[] Unk64 = new byte[0x2DB0];                 // 0x335B0 -> 0x3635F
-		public byte[] Unk65 = new byte[0x50];                   // 0x36360 -> 0x363AF
+		public byte[] CurrentMapID_Again = new byte[2];			// 0x36360
+		public byte[] Unk65 = new byte[0x4E];                   // 0x36362 -> 0x363AF
 		public byte[] Unk66 = new byte[0x270];                  // 0x363B0 -> 0x3661F
 		public byte[] Unk67 = new byte[0xCE58];                 // 0x36620 -> 0x43478
-		public byte[] VoiceLanguage = new byte[4];              // 0x43478
+		public byte[] VoiceLanguageEnglish = new byte[4];		// 0x43478
 		public byte[] Setting2 = new byte[4];                   // 0x4347C
 		public byte[] InvertX = new byte[4];                    // 0x43480
 		public byte[] DateFormat = new byte[4];                 // 0x43484

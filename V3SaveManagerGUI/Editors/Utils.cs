@@ -9,12 +9,16 @@ namespace V3SaveManagerGUI.Editors
 {
 	internal class Utils
 	{
-		public static bool IsValidNumber(string str, bool allow_negative)
+		public static bool IsValidNumber(string str, bool allow_negative, bool allow_decimal)
 		{
 			string accepted = "0123456789";
 			if (allow_negative)
 			{
 				accepted += "-";
+			}
+			if(allow_decimal)
+			{
+				accepted += ".";
 			}
 
 			bool only_accepted = str.All(x => accepted.Contains(x));
@@ -45,7 +49,40 @@ namespace V3SaveManagerGUI.Editors
 				}
 			}
 
+			if(allow_decimal)
+			{
+				bool contains_decimal = str.Contains(".");
+
+				if(contains_decimal)
+				{
+					bool decimal_in_the_middle = !str.StartsWith(".") && !str.EndsWith(".");
+					bool one_decimal = str.IndexOf(".") == str.LastIndexOf(".");
+
+					if(!decimal_in_the_middle)
+					{
+						return false;
+					}
+
+					if(!one_decimal)
+					{
+						return false;
+					}
+				}
+			}
+
 			return true;
+		}
+
+		static public string MakeDouble(string str)
+		{
+
+			int find_dot = str.IndexOf(".");
+			if (find_dot > -1)
+			{
+				return str;
+			}
+			str += ".0";
+			return str;
 		}
 	}
 }

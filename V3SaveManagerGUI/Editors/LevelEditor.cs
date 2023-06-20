@@ -19,8 +19,8 @@ namespace V3SaveManagerGUI.Editors
 
 		private void SetButton_Click(object sender, EventArgs e)
 		{
-			bool valid_level = Utils.IsValidNumber(this.NewLevelTextbox.Text, true);
-			bool valid_exp = Utils.IsValidNumber(this.NewTotalEXPTextbox.Text, true);
+			bool valid_level = Utils.IsValidNumber(this.NewLevelTextbox.Text, true, false);
+			bool valid_exp = Utils.IsValidNumber(this.NewTotalEXPTextbox.Text, true, false);
 
 			if (!valid_level || !valid_exp)
 			{
@@ -38,7 +38,7 @@ namespace V3SaveManagerGUI.Editors
 
 		public void CalculateEXP()
 		{
-			bool valid_number = Utils.IsValidNumber(DesiredLevelTextbox.Text, false);
+			bool valid_number = Utils.IsValidNumber(DesiredLevelTextbox.Text, false, false);
 			if (!valid_number)
 			{
 				DesiredLevelTextbox.Text = "";

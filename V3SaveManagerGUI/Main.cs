@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using System.Globalization;
 using V3SaveManagerGUI.Editors;
 
 namespace V3SaveManagerGUI
@@ -12,6 +13,7 @@ namespace V3SaveManagerGUI
 		public Main()
 		{
 			InitializeComponent();
+			CultureInfo.CurrentCulture = CultureInfo.InvariantCulture;
 			LoadCombobox();
 		}
 
@@ -22,6 +24,7 @@ namespace V3SaveManagerGUI
 			Playtime,
 			Flags,
 			Level_and_EXP,
+			Map,
 			Num,
 		}
 
@@ -65,8 +68,56 @@ namespace V3SaveManagerGUI
 				case Editable.Level_and_EXP:
 					EditLevelAndEXP();
 					break;
+				case Editable.Map:
+					EditMap();
+					break;
 				default:
 					break;
+			}
+		}
+
+		private void EditMap()
+		{
+			/*
+			 * CurrentSaveFile.CurrentMapID = BitConverter.GetBytes((short)131);
+			 * CurrentSaveFile.CurrentMapID_Again = BitConverter.GetBytes((short)131);
+			*/
+
+			string current_map = BitConverter.ToInt16(CurrentSaveFile.CurrentMapID).ToString();
+			string current_map_again = BitConverter.ToInt16(CurrentSaveFile.CurrentMapID_Again).ToString();
+			if(current_map != current_map_again)
+			{
+				Debug.WriteLine("...Invalid map id?");
+			}
+			string current_position_x = BitConverter.ToSingle(CurrentSaveFile.MapPositionX).ToString();
+			current_position_x = Utils.MakeDouble(current_position_x);
+			string current_position_y = BitConverter.ToSingle(CurrentSaveFile.MapPositionY).ToString();
+			current_position_y = Utils.MakeDouble(current_position_y);
+			MapEditor me = new MapEditor();
+			me.CurrentMapIDNoLabel.Text = current_map;
+			me.CurrentPositionXLabel.Text = "Current Position X: " + current_position_x;
+			me.CurrentPositionYLabel.Text = "Current Position Y: " + current_position_y;
+			me.NewPositionXTextbox.Text = current_position_x;
+			me.NewPositionYTextbox.Text = current_position_y;
+			me.LoadListbox();
+			var res = me.ShowDialog();
+			if(res == DialogResult.OK)
+			{
+				int selected_map_index = me.PossibleMapsListbox.SelectedIndex;
+				if (me.PossibleMapsListbox != null && me.PossibleMapsListbox.Items != null && selected_map_index > -1)
+				{
+					string selected_entry = me.PossibleMapsListbox.Items[selected_map_index].ToString();
+					selected_entry = selected_entry.Substring(0, 5); // ID123 (removes whatever is after the ID)
+					selected_entry = selected_entry.Substring(2); // 123 (removes ID)
+					CurrentSaveFile.CurrentMapID = BitConverter.GetBytes(short.Parse(selected_entry));
+					CurrentSaveFile.CurrentMapID_Again = BitConverter.GetBytes(short.Parse(selected_entry));
+				}
+				Debug.WriteLine("PosX: " + me.NewPositionXTextbox.Text);
+				float posx = float.Parse(me.NewPositionXTextbox.Text);
+				float posy = float.Parse(me.NewPositionYTextbox.Text);
+				Debug.WriteLine("Parsed PosX: " + posx.ToString());
+				CurrentSaveFile.MapPositionX = BitConverter.GetBytes((float)posx);
+				CurrentSaveFile.MapPositionY = BitConverter.GetBytes((float)posy);
 			}
 		}
 

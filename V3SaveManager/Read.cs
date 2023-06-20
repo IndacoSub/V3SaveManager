@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -108,6 +109,7 @@ namespace V3SaveManager
 					sv.Unk44 = br.ReadBytes(sv.Unk44.Length);
 					sv.Unk45 = br.ReadBytes(sv.Unk45.Length);
 					sv.Unk46 = br.ReadBytes(sv.Unk46.Length);
+					sv.CurrentMapID = br.ReadBytes(sv.CurrentMapID.Length);
 					sv.Unk47 = br.ReadBytes(sv.Unk47.Length);
 					sv.BGMIndex = br.ReadBytes(sv.BGMIndex.Length);
 					sv.Unk48 = br.ReadBytes(sv.Unk48.Length);
@@ -143,18 +145,14 @@ namespace V3SaveManager
 					sv.Voiceline14 = br.ReadBytes(sv.Voiceline14.Length);
 					sv.Voiceline15 = br.ReadBytes(sv.Voiceline15.Length);
 					sv.Voiceline16 = br.ReadBytes(sv.Voiceline16.Length);
-#if DEBUG
-					//sv.DEBUG_VoiceLine17 = br.ReadBytes(sv.DEBUG_VoiceLine17.Length);
-					//sv.DEBUG_VoiceLine18 = br.ReadBytes(sv.DEBUG_VoiceLine18.Length);
-					//sv.DEBUG_VoiceLine19 = br.ReadBytes(sv.DEBUG_VoiceLine19.Length);
-#endif
 					sv.Unk62 = br.ReadBytes(sv.Unk62.Length);
 					sv.Unk63 = br.ReadBytes(sv.Unk63.Length);
 					sv.Unk64 = br.ReadBytes(sv.Unk64.Length);
+					sv.CurrentMapID_Again = br.ReadBytes(sv.CurrentMapID_Again.Length);
 					sv.Unk65 = br.ReadBytes(sv.Unk65.Length);
 					sv.Unk66 = br.ReadBytes(sv.Unk66.Length);
 					sv.Unk67 = br.ReadBytes(sv.Unk67.Length);
-					sv.VoiceLanguage = br.ReadBytes(sv.VoiceLanguage.Length);
+					sv.VoiceLanguageEnglish = br.ReadBytes(sv.VoiceLanguageEnglish.Length);
 					sv.Setting2 = br.ReadBytes(sv.Setting2.Length);
 					sv.InvertX = br.ReadBytes(sv.InvertX.Length);
 					sv.DateFormat = br.ReadBytes(sv.DateFormat.Length);

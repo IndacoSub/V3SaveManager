@@ -19,7 +19,7 @@ namespace V3SaveManagerGUI.Editors
 
 		private void SetButton_Click(object sender, EventArgs e)
 		{
-			bool valid_new = Utils.IsValidNumber(this.NewPlaytimeTextbox.Text, true);
+			bool valid_new = Utils.IsValidNumber(this.NewPlaytimeTextbox.Text, true, false);
 			if (!valid_new)
 			{
 				return;
@@ -52,10 +52,10 @@ namespace V3SaveManagerGUI.Editors
 				this.FramesTextbox.Text = "0";
 			}
 
-			bool valid_hours = Utils.IsValidNumber(this.HoursTextbox.Text, false);
-			bool valid_minutes = Utils.IsValidNumber(this.MinutesTextbox.Text, false);
-			bool valid_seconds = Utils.IsValidNumber(this.SecondsTextbox.Text, false);
-			bool valid_frames = Utils.IsValidNumber(this.FramesTextbox.Text, false);
+			bool valid_hours = Utils.IsValidNumber(this.HoursTextbox.Text, false, false);
+			bool valid_minutes = Utils.IsValidNumber(this.MinutesTextbox.Text, false, false);
+			bool valid_seconds = Utils.IsValidNumber(this.SecondsTextbox.Text, false, false);
+			bool valid_frames = Utils.IsValidNumber(this.FramesTextbox.Text, false, false);
 
 			if (!valid_hours || !valid_minutes || !valid_seconds || !valid_frames)
 			{

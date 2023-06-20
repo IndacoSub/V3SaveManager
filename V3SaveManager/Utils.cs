@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,7 +13,7 @@ namespace V3SaveManager
 		// Old code, pretty much unmaintained
 		// Optimizations and fixes are welcome
 
-		private static int GetLastCharacterIndex(string str)
+		private static int GetLastCharacterIndex(string str, bool remove_whitespace)
 		{
 			int[] whitelist = new int[]
 			{
@@ -25,27 +26,42 @@ namespace V3SaveManager
 				0x0D,
 				0x20,
 				0x3000
+
 			};
-			int i = 0;
+			int i = -1;
+
 			foreach (char c in str)
 			{
-				if (char.IsWhiteSpace(c) && !whitelist.Contains(c))
+				i++;
+
+				string cur = str.Substring(i);
+				if(cur.All(x => whitelist.Contains(x)))
 				{
-					Console.WriteLine("Unknown whitespace character: " + (int)c);
 					return i;
 				}
-				i++;
 			}
+
 			return i;
 		}
 
-		private static string BytesToString(byte[] arr)
+		private static string BytesToString(byte[] arr, bool replace_special = false, bool remove_whitespace = false)
 		{
 			string ret = Encoding.UTF8.GetString(arr, 0, arr.Length);
-			int lastcharindex = GetLastCharacterIndex(ret);
+
+			if (replace_special)
+			{
+				ret = ret.Replace("\r\n", "\\r\\n");
+				ret = ret.Replace("\\r", "");
+				ret = ret.Replace("\n", "\\n");
+				ret = ret.Replace("\t", "\\t");
+			}
+
+			int lastcharindex = GetLastCharacterIndex(ret, remove_whitespace);
 			ret = ret.Substring(0, lastcharindex);
+
 			ret = ret.Normalize();
 			ret = ret.Trim();
+
 			return ret;
 		}
 
@@ -85,6 +101,28 @@ namespace V3SaveManager
 		private static string GetEndOfString(string str)
 		{
 			return str.Substring(str.Length - (str.Length / 50));
+		}
+
+		public static string PadString(string str, int minimum_length, char c)
+		{
+
+			while (str.Length < minimum_length)
+			{
+				str += c;
+			}
+			return str;
+		}
+
+		private static void Assert(bool v, string message = "")
+		{
+			if (!v)
+			{
+				if (message.Length > 0)
+				{
+					Debug.WriteLine(message);
+				}
+				// throw new NotImplementedException();
+			}
 		}
 	}
 }
