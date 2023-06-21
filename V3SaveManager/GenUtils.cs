@@ -34,6 +34,8 @@ namespace V3SaveManager
 				{ "MapPositionY", "Float" },
 				{ "BacklogText", "BeginString" },
 				{ "VoiceLanguageEnglish", "Boolean" },
+				{ "IsStatusAlive", "ByteString" },
+				{ "IsStatusUnknown", "ByteString" },
 			};
 
 			var first = dict.FirstOrDefault(x => x.Key == name);

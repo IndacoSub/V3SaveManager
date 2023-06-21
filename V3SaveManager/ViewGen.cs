@@ -25,7 +25,7 @@ namespace V3SaveManager
 				{
 					continue;
 				}
-				if (member.Name.ToLowerInvariant().Contains("unk") || member.Name.ToLowerInvariant().Contains("todo"))
+				if (member.Name.ToLowerInvariant().StartsWith("unk") || member.Name.ToLowerInvariant().StartsWith("todo"))
 				{
 					continue;
 				}

@@ -42,7 +42,8 @@ namespace V3SaveManager
 			ViewValue(this.CurrentLevelShort, "CurrentLevelShort", "short");
 			ViewValue(this.MapPositionX, "MapPositionX", "Float");
 			ViewValue(this.MapPositionY, "MapPositionY", "Float");
-			ViewValue(this.IsStatusAlive, "IsStatusAlive", "int");
+			ViewValue(this.IsStatusAlive, "IsStatusAlive", "ByteString");
+			ViewValue(this.IsStatusUnknown, "IsStatusUnknown", "ByteString");
 			ViewValue(this.MonopadTheme, "MonopadTheme", "int");
 			ViewValue(this.BacklogText, "BacklogText", "BeginString");
 			ViewValue(this.CasinoCoins, "CasinoCoins", "int");
@@ -120,6 +121,13 @@ namespace V3SaveManager
 				case "int64":
 					Assert(value.Length == sizeof(Int64) && value.Length == sizeof(long), name + " is NOT a long");
 					Console.WriteLine(name + ": " + BitConverter.ToInt64(value));
+					break;
+				case "bytestring":
+					{
+						int v_int = BitConverter.ToInt32(value);
+						string v = Convert.ToString(v_int, 2);
+						Console.WriteLine(name + ": " + v);
+					}
 					break;
 				case "beginstring":
 					Console.WriteLine(name + ": " + GetBeginningOfString(BytesToString(value)));

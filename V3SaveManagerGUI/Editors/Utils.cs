@@ -84,5 +84,13 @@ namespace V3SaveManagerGUI.Editors
 			str += ".0";
 			return str;
 		}
+
+		static public string ReverseString(string str)
+		{
+			char[] arr = str.ToCharArray();
+			Array.Reverse(arr);
+			string ret = new string(arr);
+			return ret;
+		}
 	}
 }
