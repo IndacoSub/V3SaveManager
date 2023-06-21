@@ -13,7 +13,7 @@ namespace V3SaveManagerGUI
 		enum Editable
 		{
 			None,
-			Monocoins,
+			Coins,
 			Playtime,
 			Flags,
 			Level_and_EXP,
@@ -57,7 +57,7 @@ namespace V3SaveManagerGUI
 			{
 				case Editable.None:
 					break;
-				case Editable.Monocoins:
+				case Editable.Coins:
 					EditMonocoins();
 					break;
 				case Editable.Playtime:

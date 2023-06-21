@@ -32,13 +32,16 @@
 			CurrentMonocoinsLabel = new Label();
 			NewMonocoinsTextbox = new TextBox();
 			NewMonocoinsLabel = new Label();
+			CurrentCasinoCoinsLabel = new Label();
+			NewCasinoCoinsLabel = new Label();
+			NewCasinoCoinsTextbox = new TextBox();
 			SuspendLayout();
 			// 
 			// SetButton
 			// 
-			SetButton.Location = new Point(145, 58);
+			SetButton.Location = new Point(12, 114);
 			SetButton.Name = "SetButton";
-			SetButton.Size = new Size(134, 23);
+			SetButton.Size = new Size(267, 23);
 			SetButton.TabIndex = 0;
 			SetButton.Text = "Set";
 			SetButton.UseVisualStyleBackColor = true;
@@ -55,7 +58,7 @@
 			// 
 			// NewMonocoinsTextbox
 			// 
-			NewMonocoinsTextbox.Location = new Point(12, 57);
+			NewMonocoinsTextbox.Location = new Point(152, 85);
 			NewMonocoinsTextbox.MaxLength = 3;
 			NewMonocoinsTextbox.Name = "NewMonocoinsTextbox";
 			NewMonocoinsTextbox.Size = new Size(127, 23);
@@ -64,17 +67,46 @@
 			// NewMonocoinsLabel
 			// 
 			NewMonocoinsLabel.AutoSize = true;
-			NewMonocoinsLabel.Location = new Point(12, 39);
+			NewMonocoinsLabel.Location = new Point(12, 88);
 			NewMonocoinsLabel.Name = "NewMonocoinsLabel";
 			NewMonocoinsLabel.Size = new Size(127, 15);
 			NewMonocoinsLabel.TabIndex = 3;
 			NewMonocoinsLabel.Text = "Insert new monocoins:";
 			// 
+			// CurrentCasinoCoinsLabel
+			// 
+			CurrentCasinoCoinsLabel.AutoSize = true;
+			CurrentCasinoCoinsLabel.Location = new Point(12, 24);
+			CurrentCasinoCoinsLabel.Name = "CurrentCasinoCoinsLabel";
+			CurrentCasinoCoinsLabel.Size = new Size(118, 15);
+			CurrentCasinoCoinsLabel.TabIndex = 4;
+			CurrentCasinoCoinsLabel.Text = "Current casino coins:";
+			// 
+			// NewCasinoCoinsLabel
+			// 
+			NewCasinoCoinsLabel.AutoSize = true;
+			NewCasinoCoinsLabel.Location = new Point(12, 62);
+			NewCasinoCoinsLabel.Name = "NewCasinoCoinsLabel";
+			NewCasinoCoinsLabel.Size = new Size(132, 15);
+			NewCasinoCoinsLabel.TabIndex = 5;
+			NewCasinoCoinsLabel.Text = "Insert new casino coins:";
+			// 
+			// NewCasinoCoinsTextbox
+			// 
+			NewCasinoCoinsTextbox.Location = new Point(152, 59);
+			NewCasinoCoinsTextbox.MaxLength = 7;
+			NewCasinoCoinsTextbox.Name = "NewCasinoCoinsTextbox";
+			NewCasinoCoinsTextbox.Size = new Size(127, 23);
+			NewCasinoCoinsTextbox.TabIndex = 6;
+			// 
 			// MonocoinEditor
 			// 
 			AutoScaleDimensions = new SizeF(7F, 15F);
 			AutoScaleMode = AutoScaleMode.Font;
-			ClientSize = new Size(291, 93);
+			ClientSize = new Size(291, 149);
+			Controls.Add(NewCasinoCoinsTextbox);
+			Controls.Add(NewCasinoCoinsLabel);
+			Controls.Add(CurrentCasinoCoinsLabel);
 			Controls.Add(NewMonocoinsLabel);
 			Controls.Add(NewMonocoinsTextbox);
 			Controls.Add(CurrentMonocoinsLabel);
@@ -91,5 +123,8 @@
 		public Label CurrentMonocoinsLabel;
 		public TextBox NewMonocoinsTextbox;
 		public Label NewMonocoinsLabel;
+		public Label CurrentCasinoCoinsLabel;
+		public Label NewCasinoCoinsLabel;
+		public TextBox NewCasinoCoinsTextbox;
 	}
 }

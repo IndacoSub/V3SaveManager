@@ -90,14 +90,19 @@ namespace V3SaveManagerGUI
 
 		private void EditMonocoins()
 		{
-			string current = BitConverter.ToInt16(CurrentSaveFile.Monocoins).ToString();
+			string current_monocoins = BitConverter.ToInt16(CurrentSaveFile.Monocoins).ToString();
+			string current_casino_coins = BitConverter.ToInt32(CurrentSaveFile.CasinoCoins).ToString();
 			MonocoinEditor me = new MonocoinEditor();
-			me.CurrentMonocoinsLabel.Text = "Current Monocoins: " + current;
-			me.NewMonocoinsTextbox.Text = current;
+			me.CurrentMonocoinsLabel.Text = "Current Monocoins: " + current_monocoins;
+			me.NewMonocoinsTextbox.Text = current_monocoins;
+			me.CurrentCasinoCoinsLabel.Text = "Current casino coins: " + current_casino_coins;
+			me.NewCasinoCoinsTextbox.Text = current_casino_coins;
+			
 			var res = me.ShowDialog();
 			if (res == DialogResult.OK)
 			{
 				CurrentSaveFile.Monocoins = BitConverter.GetBytes(short.Parse(me.NewMonocoinsTextbox.Text));
+				CurrentSaveFile.CasinoCoins = BitConverter.GetBytes(int.Parse(me.NewCasinoCoinsTextbox.Text));
 			}
 		}
 
