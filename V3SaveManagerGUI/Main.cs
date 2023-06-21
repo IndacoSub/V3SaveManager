@@ -19,6 +19,7 @@ namespace V3SaveManagerGUI
 			Level_and_EXP,
 			Map,
 			Character_Statuses,
+			Files,
 			Num,
 		}
 
@@ -74,6 +75,9 @@ namespace V3SaveManagerGUI
 					break;
 				case Editable.Character_Statuses:
 					EditDeaths();
+					break;
+				case Editable.Files:
+					EditFiles();
 					break;
 				default:
 					break;

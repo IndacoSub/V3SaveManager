@@ -4,12 +4,60 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using V3SaveManager;
 using V3SaveManagerGUI.Editors;
 
 namespace V3SaveManagerGUI
 {
 	public partial class Main : Form
 	{
+		private void EditFiles()
+		{
+			DialogResult res = DialogResult.No;
+			FilesEditor fe = new FilesEditor();
+			do
+			{
+				List<string> values = new List<string>();
+
+				string WRDArchive = Savefile.BytesToString(CurrentSaveFile.WRDArchive);
+				string SubroutineArchive = Savefile.BytesToString(CurrentSaveFile.SubroutineArchive);
+				string WRDFile = Savefile.BytesToString(CurrentSaveFile.WRDFile);
+				string SubroutineWRD = Savefile.BytesToString(CurrentSaveFile.SubroutineWRD);
+				string TextArchive = Savefile.BytesToString(CurrentSaveFile.TextArchive);
+				string SubroutineTextArchive = Savefile.BytesToString(CurrentSaveFile.SubroutineTextArchive);
+				string TextSTX = Savefile.BytesToString(CurrentSaveFile.TextSTX);
+				string SubroutineSTX = Savefile.BytesToString(CurrentSaveFile.SubroutineSTX);
+				string WRDMap = Savefile.BytesToString(CurrentSaveFile.WRDMap);
+
+				values.Add(WRDArchive);
+				values.Add(SubroutineArchive);
+				values.Add(WRDFile);
+				values.Add(SubroutineWRD);
+				values.Add(TextArchive);
+				values.Add(SubroutineTextArchive);
+				values.Add(TextSTX);
+				values.Add(SubroutineSTX);
+				values.Add(WRDMap);
+
+				fe = new FilesEditor();
+				fe.LoadInfo(values);
+				res = fe.ShowDialog();
+			} while (res == DialogResult.No);
+
+			if(res == DialogResult.OK)
+			{
+				CurrentSaveFile.WRDArchive = Savefile.StringToBytes(fe.FileInfoWRDArchive.NewValueTextbox.Text, CurrentSaveFile.WRDArchive.Length);
+				CurrentSaveFile.SubroutineArchive = Savefile.StringToBytes(fe.FileInfoSubroutineArchive.NewValueTextbox.Text, CurrentSaveFile.SubroutineArchive.Length);
+				CurrentSaveFile.WRDFile = Savefile.StringToBytes(fe.FileInfoWRDFile.NewValueTextbox.Text, CurrentSaveFile.WRDFile.Length);
+				CurrentSaveFile.SubroutineWRD = Savefile.StringToBytes(fe.FileInfoSubroutineWRD.NewValueTextbox.Text, CurrentSaveFile.SubroutineWRD.Length);
+				CurrentSaveFile.TextArchive = Savefile.StringToBytes(fe.FileInfoTextArchive.NewValueTextbox.Text, CurrentSaveFile.TextArchive.Length);
+				CurrentSaveFile.SubroutineTextArchive = Savefile.StringToBytes(fe.FileInfoSubroutineTextArchive.NewValueTextbox.Text, CurrentSaveFile.SubroutineTextArchive.Length);
+				CurrentSaveFile.TextSTX = Savefile.StringToBytes(fe.FileInfoTextSTX.NewValueTextbox.Text, CurrentSaveFile.TextSTX.Length);
+				CurrentSaveFile.SubroutineSTX = Savefile.StringToBytes(fe.FileInfoSubroutineSTX.NewValueTextbox.Text, CurrentSaveFile.SubroutineSTX.Length);
+				CurrentSaveFile.WRDMap = Savefile.StringToBytes(fe.FileInfoWRDMap.NewValueTextbox.Text, CurrentSaveFile.WRDMap.Length);
+			}
+		}
+
 		private void EditMap()
 		{
 			string current_map = BitConverter.ToInt16(CurrentSaveFile.CurrentMapID).ToString();

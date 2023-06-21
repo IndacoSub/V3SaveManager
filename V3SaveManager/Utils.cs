@@ -44,7 +44,7 @@ namespace V3SaveManager
 			return i;
 		}
 
-		private static string BytesToString(byte[] arr, bool replace_special = false, bool remove_whitespace = false)
+		public static string BytesToString(byte[] arr, bool replace_special = false, bool remove_whitespace = false)
 		{
 			string ret = Encoding.UTF8.GetString(arr, 0, arr.Length);
 
@@ -65,7 +65,7 @@ namespace V3SaveManager
 			return ret;
 		}
 
-		private static byte[] StringToBytes(string str, int size)
+		public static byte[] StringToBytes(string str, int size)
 		{
 			string str2 = str;
 			byte[] ret = Encoding.UTF8.GetBytes(str2);
