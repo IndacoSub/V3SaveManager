@@ -32,6 +32,7 @@ namespace V3SaveManagerGUI.Editors
 				FileInfoTextSTX,
 				FileInfoSubroutineSTX,
 				FileInfoWRDMap,
+				CurrentLine,
 			};
 
 			return ret;
@@ -50,6 +51,7 @@ namespace V3SaveManagerGUI.Editors
 				"Text STX",
 				"Subroutine STX",
 				"WRD Map",
+				"Current Line",
 			};
 
 			return ret;
@@ -60,7 +62,7 @@ namespace V3SaveManagerGUI.Editors
 			var files = GetAllFiles();
 			var names = GetFileNames();
 
-			for(int i = 0; i < files.Count; i++)
+			for (int i = 0; i < files.Count; i++)
 			{
 				files[i].FieldNameLabel.Text = names[i];
 				files[i].NewValueTextbox.Text = values[i];
@@ -71,8 +73,13 @@ namespace V3SaveManagerGUI.Editors
 		private void SetButton_Click(object sender, EventArgs e)
 		{
 
-			DialogResult = DialogResult.OK;
-			this.Close();
+			bool line_valid = Utils.IsValidNumber(this.CurrentLine.NewValueTextbox.Text, false, false);
+
+			if (line_valid)
+			{
+				DialogResult = DialogResult.OK;
+				this.Close();
+			}
 		}
 
 		private void ResetButton_Click(object sender, EventArgs e)

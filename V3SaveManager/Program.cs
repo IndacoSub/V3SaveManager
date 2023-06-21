@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Globalization;
 using System.Text;
 
@@ -45,6 +46,12 @@ namespace V3SaveManager // Note: actual namespace depends on the project name.
 			else
 			{
 				file = args[0];
+			}
+
+			if(file.Length <= 0)
+			{
+				Console.WriteLine("Invalid argument(s)!");
+				return;
 			}
 
 			Console.WriteLine("Reading: " + file);

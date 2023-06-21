@@ -61,7 +61,7 @@ namespace V3SaveManager
 			ViewValue(this.BGMIndex, "BGMIndex", "int");
 			ViewValue(this.CurrentBGM, "CurrentBGM", "string");
 			ViewValue(this.CurrentSFX, "CurrentSFX", "string");
-			ViewValue(this.CurrentLine, "CurrentLine", "int");
+			ViewValue(this.CurrentLine, "CurrentLine", "short");
 			ViewValue(this.Voiceline1, "Voiceline1", "string");
 			ViewValue(this.Voiceline2, "Voiceline2", "string");
 			ViewValue(this.Voiceline3, "Voiceline3", "string");
@@ -100,54 +100,65 @@ namespace V3SaveManager
 				Console.Write("[" + type + " | " + value.Length + " | 0x" + value.Length.ToString("X") + "] ");
 			}
 
-			switch(type.ToLowerInvariant())
+#if DEBUG
+			try
 			{
-				case "boolean":
-				case "bool":
-					Assert(value.Length == sizeof(Boolean) && value.Length == sizeof(bool), name + " is NOT a bool");
-					Console.WriteLine(name + ": " + BitConverter.ToBoolean(value));
-					break;
-				case "int16":
-				case "short":
-					Assert(value.Length == sizeof(Int16) && value.Length == sizeof(short), name + " is NOT an int16");
-					Console.WriteLine(name + ": " + BitConverter.ToInt16(value));
-					break;
-				case "int32":
-				case "int":
-					Assert(value.Length == sizeof(Int32) && value.Length == sizeof(int), name + " is NOT an int32");
-					Console.WriteLine(name + ": " + BitConverter.ToInt32(value));
-					break;
-				case "long":
-				case "int64":
-					Assert(value.Length == sizeof(Int64) && value.Length == sizeof(long), name + " is NOT a long");
-					Console.WriteLine(name + ": " + BitConverter.ToInt64(value));
-					break;
-				case "bytestring":
-					{
-						int v_int = BitConverter.ToInt32(value);
-						string v = Convert.ToString(v_int, 2);
-						Console.WriteLine(name + ": " + v);
-					}
-					break;
-				case "beginstring":
-					Console.WriteLine(name + ": " + GetBeginningOfString(BytesToString(value)));
-					break;
-				case "endstring":
-					Console.WriteLine(name + ": " + GetEndOfString(BytesToString(value)));
-					break;
-				case "string":
-					Console.WriteLine(name + ": " + BytesToString(value, true, true));
-					break;
-				case "float":
-					Console.WriteLine(name + ": " + BitConverter.ToSingle(value));
-					break;
-				case "double":
-					Console.WriteLine(name + ": " + BitConverter.ToDouble(value));
-					break;
-				default:
-					Assert(false, "Unknown type: " + type);
-					break;
+#endif
+				switch (type.ToLowerInvariant())
+				{
+					case "boolean":
+					case "bool":
+						Assert(value.Length == sizeof(Boolean) && value.Length == sizeof(bool), name + " is NOT a bool");
+						Console.WriteLine(name + ": " + BitConverter.ToBoolean(value));
+						break;
+					case "int16":
+					case "short":
+						Assert(value.Length == sizeof(Int16) && value.Length == sizeof(short), name + " is NOT an int16");
+						Console.WriteLine(name + ": " + BitConverter.ToInt16(value));
+						break;
+					case "int32":
+					case "int":
+						Assert(value.Length == sizeof(Int32) && value.Length == sizeof(int), name + " is NOT an int32");
+						Console.WriteLine(name + ": " + BitConverter.ToInt32(value));
+						break;
+					case "long":
+					case "int64":
+						Assert(value.Length == sizeof(Int64) && value.Length == sizeof(long), name + " is NOT a long");
+						Console.WriteLine(name + ": " + BitConverter.ToInt64(value));
+						break;
+					case "bytestring":
+						{
+							int v_int = BitConverter.ToInt32(value);
+							string v = Convert.ToString(v_int, 2);
+							Console.WriteLine(name + ": " + v);
+						}
+						break;
+					case "beginstring":
+						Console.WriteLine(name + ": " + GetBeginningOfString(BytesToString(value)));
+						break;
+					case "endstring":
+						Console.WriteLine(name + ": " + GetEndOfString(BytesToString(value)));
+						break;
+					case "string":
+						Console.WriteLine(name + ": " + BytesToString(value, true, true));
+						break;
+					case "float":
+						Console.WriteLine(name + ": " + BitConverter.ToSingle(value));
+						break;
+					case "double":
+						Console.WriteLine(name + ": " + BitConverter.ToDouble(value));
+						break;
+					default:
+						Assert(false, "Unknown type: " + type);
+						break;
+				}
+#if DEBUG
 			}
+			catch (Exception e)
+			{
+				Console.WriteLine(e.Message);
+			}
+#endif
 		}
 	}
 }

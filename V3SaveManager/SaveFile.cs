@@ -121,8 +121,8 @@ namespace V3SaveManager
 		public byte[] Unk51 = new byte[0x30];                   // 0x31D24 -> 0x31D53
 		public byte[] Unk52 = new byte[0x10];                   // 0x31D54 -> 0x31D63
 		public byte[] Unk53 = new byte[0x28];                   // 0x31D64 -> 0x31D8B
-		public byte[] CurrentLine = new byte[4];                // 0x31D8C
-		public byte[] Unk54 = new byte[0x2E0];                  // 0x31D90 -> 0x3206F
+		public byte[] CurrentLine = new byte[2];                // 0x31D8C
+		public byte[] Unk54 = new byte[0x2E2];                  // 0x31D8E -> 0x3206F
 		public byte[] Unk55 = new byte[4];                      // 0x32070
 		public byte[] Unk56 = new byte[4];                      // 0x32074
 		public byte[] Unk57 = new byte[4];                      // 0x32078

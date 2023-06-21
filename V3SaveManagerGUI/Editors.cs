@@ -28,6 +28,8 @@ namespace V3SaveManagerGUI
 				string TextSTX = Savefile.BytesToString(CurrentSaveFile.TextSTX);
 				string SubroutineSTX = Savefile.BytesToString(CurrentSaveFile.SubroutineSTX);
 				string WRDMap = Savefile.BytesToString(CurrentSaveFile.WRDMap);
+				int CurrentLine = BitConverter.ToInt16(CurrentSaveFile.CurrentLine);
+				string CurrentLineStr = CurrentLine.ToString();
 
 				values.Add(WRDArchive);
 				values.Add(SubroutineArchive);
@@ -38,6 +40,7 @@ namespace V3SaveManagerGUI
 				values.Add(TextSTX);
 				values.Add(SubroutineSTX);
 				values.Add(WRDMap);
+				values.Add(CurrentLineStr);
 
 				fe = new FilesEditor();
 				fe.LoadInfo(values);
@@ -55,6 +58,7 @@ namespace V3SaveManagerGUI
 				CurrentSaveFile.TextSTX = Savefile.StringToBytes(fe.FileInfoTextSTX.NewValueTextbox.Text, CurrentSaveFile.TextSTX.Length);
 				CurrentSaveFile.SubroutineSTX = Savefile.StringToBytes(fe.FileInfoSubroutineSTX.NewValueTextbox.Text, CurrentSaveFile.SubroutineSTX.Length);
 				CurrentSaveFile.WRDMap = Savefile.StringToBytes(fe.FileInfoWRDMap.NewValueTextbox.Text, CurrentSaveFile.WRDMap.Length);
+				CurrentSaveFile.CurrentLine = BitConverter.GetBytes(short.Parse(fe.CurrentLine.NewValueTextbox.Text));
 			}
 		}
 
