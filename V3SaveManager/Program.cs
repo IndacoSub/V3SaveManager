@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Diagnostics;
+using System.Globalization;
 using System.Text;
 
 namespace V3SaveManager // Note: actual namespace depends on the project name.
@@ -27,36 +29,63 @@ namespace V3SaveManager // Note: actual namespace depends on the project name.
 	}
 
 	internal class Program
-    {
-
-        static void Main(string[] args)
-        {
+	{
+		static void Main(string[] args)
+		{
 			string file = "";
-#if DEBUG
-			file = ""; /* Put .dat path and .dat file, ex. C:\Games\V3\Savedata\SAVE-DATA00.dat */
-#else
-			if(args == null || args.Length <= 0)
-            {
-                Console.WriteLine("No arguments found!");
-                return;
-            }
 
-			file = args[0];
+			if (args == null || args.Length <= 0)
+			{
+#if !DEBUG
+				Console.WriteLine("No arguments found!");
+				return;
+#else
+				file = ""; /* Put .dat path and .dat file, ex. C:\Games\V3\Savedata\SAVE-DATA00.dat */
 #endif
+			}
+			else
+			{
+				file = args[0];
+			}
+
+			if (file.Length <= 0)
+			{
+				Console.WriteLine("Invalid argument(s)!");
+				return;
+			}
 
 			Console.WriteLine("Reading: " + file);
 
-            string path = Directory.GetParent(file).FullName;
-            string newfile = Path.Combine(path, "mysave.dat");
+			string path = Directory.GetParent(file).FullName;
+			string newfile = Path.Combine(path, "mysave.dat");
 
-            Savefile sv = Savefile.ReadSave(file);
+			Savefile sv = Savefile.ReadSave(file);
 
-            Console.WriteLine("File red!");
-            Console.WriteLine();
+			Console.WriteLine("File red!");
+			Console.WriteLine();
 
-            sv.ViewSave();
-            sv.EditSave();
-            sv.WriteSave(newfile);
-        }
+			if (args.Length >= 2)
+			{
+				bool generate = args[1] == "--generate";
+
+				if (generate)
+				{
+					// THESE NEED TO BE COPYPASTED
+
+					Console.WriteLine(" ---------------------------------------------------");
+					sv.GenerateAllRead();
+					Console.WriteLine(" ---------------------------------------------------");
+					sv.GenerateAllWrite();
+					Console.WriteLine(" ---------------------------------------------------");
+					sv.GenerateAllView(file);
+
+					return;
+				}
+			}
+
+			sv.NewViewSave();
+			sv.EditSave();
+			sv.WriteSave(newfile);
+		}
 	}
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -112,6 +113,7 @@ namespace V3SaveManager
 					bw.Write(this.Unk44);
 					bw.Write(this.Unk45);
 					bw.Write(this.Unk46);
+					bw.Write(this.CurrentMapID);
 					bw.Write(this.Unk47);
 					bw.Write(this.BGMIndex);
 					bw.Write(this.Unk48);
@@ -119,6 +121,7 @@ namespace V3SaveManager
 					bw.Write(this.CurrentBGM);
 					bw.Write(this.Unk50);
 					bw.Write(this.CurrentSFX);
+					bw.Write(this.CurrentSFX_Again);
 					bw.Write(this.Unk51);
 					bw.Write(this.Unk52);
 					bw.Write(this.Unk53);
@@ -150,10 +153,11 @@ namespace V3SaveManager
 					bw.Write(this.Unk62);
 					bw.Write(this.Unk63);
 					bw.Write(this.Unk64);
+					bw.Write(this.CurrentMapID_Again);
 					bw.Write(this.Unk65);
 					bw.Write(this.Unk66);
 					bw.Write(this.Unk67);
-					bw.Write(this.VoiceLanguage);
+					bw.Write(this.VoiceLanguageEnglish);
 					bw.Write(this.Setting2);
 					bw.Write(this.InvertX);
 					bw.Write(this.DateFormat);
