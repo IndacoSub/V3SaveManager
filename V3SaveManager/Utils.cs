@@ -35,7 +35,7 @@ namespace V3SaveManager
 				i++;
 
 				string cur = str.Substring(i);
-				if(cur.All(x => whitelist.Contains(x)))
+				if (cur.All(x => whitelist.Contains(x)))
 				{
 					return i;
 				}

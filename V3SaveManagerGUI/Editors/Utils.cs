@@ -16,7 +16,7 @@ namespace V3SaveManagerGUI.Editors
 			{
 				accepted += "-";
 			}
-			if(allow_decimal)
+			if (allow_decimal)
 			{
 				accepted += ".";
 			}
@@ -32,7 +32,7 @@ namespace V3SaveManagerGUI.Editors
 			{
 				bool contains_minus = str.Contains('-');
 
-				if(contains_minus)
+				if (contains_minus)
 				{
 					bool minus_in_front = str.StartsWith('-');
 					bool one_minus = str.IndexOf('-') == str.LastIndexOf('-');
@@ -49,21 +49,21 @@ namespace V3SaveManagerGUI.Editors
 				}
 			}
 
-			if(allow_decimal)
+			if (allow_decimal)
 			{
 				bool contains_decimal = str.Contains(".");
 
-				if(contains_decimal)
+				if (contains_decimal)
 				{
 					bool decimal_in_the_middle = !str.StartsWith(".") && !str.EndsWith(".");
 					bool one_decimal = str.IndexOf(".") == str.LastIndexOf(".");
 
-					if(!decimal_in_the_middle)
+					if (!decimal_in_the_middle)
 					{
 						return false;
 					}
 
-					if(!one_decimal)
+					if (!one_decimal)
 					{
 						return false;
 					}

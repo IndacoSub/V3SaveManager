@@ -72,7 +72,7 @@ namespace V3SaveManagerGUI
 				res = fe.ShowDialog();
 			} while (res == DialogResult.No);
 
-			if(res == DialogResult.OK)
+			if (res == DialogResult.OK)
 			{
 				CurrentSaveFile.WRDArchive = Savefile.StringToBytes(fe.FileInfoWRDArchive.NewValueTextbox.Text, CurrentSaveFile.WRDArchive.Length);
 				CurrentSaveFile.SubroutineArchive = Savefile.StringToBytes(fe.FileInfoSubroutineArchive.NewValueTextbox.Text, CurrentSaveFile.SubroutineArchive.Length);
@@ -174,7 +174,7 @@ namespace V3SaveManagerGUI
 			me.NewMonocoinsTextbox.Text = current_monocoins;
 			me.CurrentCasinoCoinsLabel.Text = "Current casino coins: " + current_casino_coins;
 			me.NewCasinoCoinsTextbox.Text = current_casino_coins;
-			
+
 			var res = me.ShowDialog();
 			if (res == DialogResult.OK)
 			{
@@ -253,7 +253,7 @@ namespace V3SaveManagerGUI
 
 				de.LoadInfo(alive_bits, unknown_bits);
 				res = de.ShowDialog();
-			} while(res == DialogResult.No);
+			} while (res == DialogResult.No);
 
 			if (res == DialogResult.OK)
 			{

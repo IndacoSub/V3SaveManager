@@ -176,7 +176,7 @@ namespace V3SaveManagerGUI.Editors
 
 			ret = Utils.ReverseString(ret);
 
-			while(ret.Length < 32)
+			while (ret.Length < 32)
 			{
 				ret = ret.Insert(0, "1");
 			}

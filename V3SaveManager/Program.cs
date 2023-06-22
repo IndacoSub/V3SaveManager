@@ -48,7 +48,7 @@ namespace V3SaveManager // Note: actual namespace depends on the project name.
 				file = args[0];
 			}
 
-			if(file.Length <= 0)
+			if (file.Length <= 0)
 			{
 				Console.WriteLine("Invalid argument(s)!");
 				return;

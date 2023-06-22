@@ -248,8 +248,8 @@ namespace V3SaveManagerGUI.Editors
 
 			bool valid_position_x = Utils.IsValidNumber(NewPositionXTextbox.Text, true, true);
 			bool valid_position_y = Utils.IsValidNumber(NewPositionYTextbox.Text, true, true);
-			
-			if(!valid_position_x || !valid_position_y)
+
+			if (!valid_position_x || !valid_position_y)
 			{
 				return;
 			}

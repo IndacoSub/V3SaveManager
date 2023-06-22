@@ -89,7 +89,7 @@ namespace V3SaveManager
 
 		private void ViewValue(byte[] value, string name, string type)
 		{
-			if(type == null)
+			if (type == null)
 			{
 				Console.WriteLine("Type is null!");
 				return;
