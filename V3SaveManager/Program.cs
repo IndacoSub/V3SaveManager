@@ -64,10 +64,6 @@ namespace V3SaveManager // Note: actual namespace depends on the project name.
 			Console.WriteLine("File red!");
 			Console.WriteLine();
 
-			sv.NewViewSave();
-			sv.EditSave();
-			sv.WriteSave(newfile);
-
 			if (args.Length >= 2)
 			{
 				bool generate = args[1] == "--generate";
@@ -82,8 +78,14 @@ namespace V3SaveManager // Note: actual namespace depends on the project name.
 					sv.GenerateAllWrite();
 					Console.WriteLine(" ---------------------------------------------------");
 					sv.GenerateAllView(file);
+
+					return;
 				}
 			}
+
+			sv.NewViewSave();
+			sv.EditSave();
+			sv.WriteSave(newfile);
 		}
 	}
 }

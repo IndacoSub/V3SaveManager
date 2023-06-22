@@ -20,6 +20,7 @@ namespace V3SaveManagerGUI
 			Map,
 			Character_Statuses,
 			Files,
+			Audio,
 			Num,
 		}
 
@@ -79,6 +80,9 @@ namespace V3SaveManagerGUI
 				case Editable.Files:
 					EditFiles();
 					break;
+				case Editable.Audio:
+					EditAudio();
+					break;
 				default:
 					break;
 			}
@@ -118,6 +122,7 @@ namespace V3SaveManagerGUI
 			FilePath = new FileInfo(openFileDialog.FileName).FullName;
 			CurrentSaveFile = V3SaveManager.Savefile.ReadSave(FilePath);
 			LoadedFile = true;
+			OpenReminderLabel.Text = "File: " + Path.GetFileName(openFileDialog.FileName);
 		}
 	}
 }

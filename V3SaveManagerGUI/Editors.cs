@@ -11,6 +11,31 @@ namespace V3SaveManagerGUI
 {
 	public partial class Main : Form
 	{
+		private void EditAudio()
+		{
+
+			int bgmindex = BitConverter.ToInt32(CurrentSaveFile.BGMIndex);
+			string currentbgm = Savefile.BytesToString(CurrentSaveFile.CurrentBGM);
+			string currentsfx = Savefile.BytesToString(CurrentSaveFile.CurrentSFX);
+			string currentsfx_again = Savefile.BytesToString(CurrentSaveFile.CurrentSFX_Again);
+
+			AudioEditor ae = new AudioEditor();
+
+			ae.BGMIndex.LoadInfo("BGM Index", bgmindex.ToString());
+			ae.CurrentBGM.LoadInfo("Current BGM", currentbgm);
+			ae.CurrentSFX.LoadInfo("Current SFX", currentsfx);
+			ae.CurrentSFXAgain.LoadInfo("Current SFX again?", currentsfx_again);
+
+			var res = ae.ShowDialog();
+			if (res == DialogResult.OK)
+			{
+				CurrentSaveFile.BGMIndex = BitConverter.GetBytes(int.Parse(ae.BGMIndex.NewValueTextbox.Text));
+				CurrentSaveFile.CurrentBGM = Savefile.StringToBytes(ae.CurrentBGM.NewValueTextbox.Text, CurrentSaveFile.CurrentBGM.Length);
+				CurrentSaveFile.CurrentSFX = Savefile.StringToBytes(ae.CurrentSFX.NewValueTextbox.Text, CurrentSaveFile.CurrentSFX.Length);
+				CurrentSaveFile.CurrentSFX_Again = Savefile.StringToBytes(ae.CurrentSFXAgain.NewValueTextbox.Text, CurrentSaveFile.CurrentSFX_Again.Length);
+			}
+		}
+
 		private void EditFiles()
 		{
 			DialogResult res = DialogResult.No;

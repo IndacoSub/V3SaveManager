@@ -117,6 +117,7 @@ namespace V3SaveManager
 					sv.CurrentBGM = br.ReadBytes(sv.CurrentBGM.Length);
 					sv.Unk50 = br.ReadBytes(sv.Unk50.Length);
 					sv.CurrentSFX = br.ReadBytes(sv.CurrentSFX.Length);
+					sv.CurrentSFX_Again = br.ReadBytes(sv.CurrentSFX_Again.Length);
 					sv.Unk51 = br.ReadBytes(sv.Unk51.Length);
 					sv.Unk52 = br.ReadBytes(sv.Unk52.Length);
 					sv.Unk53 = br.ReadBytes(sv.Unk53.Length);

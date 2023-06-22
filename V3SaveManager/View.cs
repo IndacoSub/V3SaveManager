@@ -61,6 +61,7 @@ namespace V3SaveManager
 			ViewValue(this.BGMIndex, "BGMIndex", "int");
 			ViewValue(this.CurrentBGM, "CurrentBGM", "string");
 			ViewValue(this.CurrentSFX, "CurrentSFX", "string");
+			ViewValue(this.CurrentSFX_Again, "CurrentSFX_Again", "string");
 			ViewValue(this.CurrentLine, "CurrentLine", "short");
 			ViewValue(this.Voiceline1, "Voiceline1", "string");
 			ViewValue(this.Voiceline2, "Voiceline2", "string");

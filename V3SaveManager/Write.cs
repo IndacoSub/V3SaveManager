@@ -121,6 +121,7 @@ namespace V3SaveManager
 					bw.Write(this.CurrentBGM);
 					bw.Write(this.Unk50);
 					bw.Write(this.CurrentSFX);
+					bw.Write(this.CurrentSFX_Again);
 					bw.Write(this.Unk51);
 					bw.Write(this.Unk52);
 					bw.Write(this.Unk53);

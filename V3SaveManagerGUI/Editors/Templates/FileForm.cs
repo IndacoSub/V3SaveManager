@@ -16,5 +16,12 @@ namespace V3SaveManagerGUI.Editors.Templates
 		{
 			InitializeComponent();
 		}
+
+		public void LoadInfo(string name, string value)
+		{
+			this.FieldNameLabel.Text = name;
+			this.CurrentValueLabel.Text = "Current value: " + value;
+			this.NewValueTextbox.Text = value;
+		}
 	}
 }

@@ -118,7 +118,8 @@ namespace V3SaveManager
 		public byte[] CurrentBGM = new byte[0x10];              // 0x31CEC -> 0x31CFB
 		public byte[] Unk50 = new byte[0x18];                   // 0x31CFC -> 0x31D13
 		public byte[] CurrentSFX = new byte[0x10];              // 0x31D14 -> 0x31D23
-		public byte[] Unk51 = new byte[0x30];                   // 0x31D24 -> 0x31D53
+		public byte[] CurrentSFX_Again = new byte[0x10];		// 0x31D24 -> 0x31D33
+		public byte[] Unk51 = new byte[0x20];                   // 0x31D34 -> 0x31D53
 		public byte[] Unk52 = new byte[0x10];                   // 0x31D54 -> 0x31D63
 		public byte[] Unk53 = new byte[0x28];                   // 0x31D64 -> 0x31D8B
 		public byte[] CurrentLine = new byte[2];                // 0x31D8C
