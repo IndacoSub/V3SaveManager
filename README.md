@@ -28,7 +28,7 @@ The GUI provides you with some options to easily edit your savefiles.
 
 It does NOT contain "as many" features as the command-line ("CLI") version.
 
-Please consider using the CLI version instead, if you need to edit data which is not accessible through the GUI version.
+Please consider using the CLI version instead, if you need to edit data which is not accessible through the GUI version (some backlog data, for example).
 
 # GUI -- How to use
 
