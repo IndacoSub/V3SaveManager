@@ -20,6 +20,8 @@ namespace V3SaveManagerGUI.Editors
 
 		private List<string> GetMapList()
 		{
+			// From game_resident/Map.dat
+
 			List<string> mapList = new List<string>()
 			{
 				"ID000_dummy",
