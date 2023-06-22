@@ -66,7 +66,7 @@
 			// 
 			SetButton.Location = new Point(12, 72);
 			SetButton.Name = "SetButton";
-			SetButton.Size = new Size(176, 23);
+			SetButton.Size = new Size(201, 23);
 			SetButton.TabIndex = 3;
 			SetButton.Text = "Set";
 			SetButton.UseVisualStyleBackColor = true;
@@ -76,11 +76,13 @@
 			// 
 			AutoScaleDimensions = new SizeF(7F, 15F);
 			AutoScaleMode = AutoScaleMode.Font;
-			ClientSize = new Size(372, 110);
+			ClientSize = new Size(225, 110);
 			Controls.Add(SetButton);
 			Controls.Add(NewGameClearFlgLabel);
 			Controls.Add(GameClearFlgCheckbox);
 			Controls.Add(CurrentGameClearFlgLabel);
+			MaximumSize = new Size(241, 149);
+			MinimumSize = new Size(241, 149);
 			Name = "FlagEditor";
 			Text = "FlagEditor";
 			ResumeLayout(false);

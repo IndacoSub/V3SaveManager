@@ -156,6 +156,8 @@
 			Controls.Add(CurrentPositionYLabel);
 			Controls.Add(CurrentPositionXLabel);
 			Controls.Add(CurrentMapLabel);
+			MaximumSize = new Size(280, 424);
+			MinimumSize = new Size(280, 424);
 			Name = "MapEditor";
 			Text = "MapEditor";
 			ResumeLayout(false);

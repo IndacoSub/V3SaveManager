@@ -111,6 +111,8 @@
 			Controls.Add(NewMonocoinsTextbox);
 			Controls.Add(CurrentMonocoinsLabel);
 			Controls.Add(SetButton);
+			MaximumSize = new Size(307, 188);
+			MinimumSize = new Size(307, 188);
 			Name = "MonocoinEditor";
 			Text = "MonocoinEditor";
 			ResumeLayout(false);

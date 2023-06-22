@@ -194,6 +194,8 @@
 			Controls.Add(NewPlaytimeTextbox);
 			Controls.Add(NewPlaytimeLabel);
 			Controls.Add(CurrentPlaytimeLabel);
+			MaximumSize = new Size(576, 194);
+			MinimumSize = new Size(576, 194);
 			Name = "PlaytimeEditor";
 			Text = "PlaytimeEditor";
 			ResumeLayout(false);

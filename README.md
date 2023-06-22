@@ -2,6 +2,8 @@
 
 A save editor dedicated to the game "Danganronpa V3: Killing Harmony", now with a Graphical User Interface ("GUI") as well.
 
+Keep in mind that it's not feature-complete, but still a work-in-progress ("WIP"), which may or may not be accurate.
+
 Contributions and bug/issue-reports are welcome and appreciated.
 
 # Compatibility

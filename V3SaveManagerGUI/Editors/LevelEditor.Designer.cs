@@ -165,6 +165,8 @@
 			Controls.Add(NewLevelLabel);
 			Controls.Add(CurrentTotalEXPLabel);
 			Controls.Add(CurrentLevelLabel);
+			MaximumSize = new Size(460, 198);
+			MinimumSize = new Size(460, 198);
 			Name = "LevelEditor";
 			Text = "LevelEditor";
 			ResumeLayout(false);

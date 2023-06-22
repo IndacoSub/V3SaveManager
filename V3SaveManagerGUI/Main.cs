@@ -15,7 +15,7 @@ namespace V3SaveManagerGUI
 			None,
 			Coins,
 			Playtime,
-			Flags,
+			Flag,
 			Level_and_EXP,
 			Map,
 			Character_Statuses,
@@ -65,7 +65,7 @@ namespace V3SaveManagerGUI
 				case Editable.Playtime:
 					EditPlaytime();
 					break;
-				case Editable.Flags:
+				case Editable.Flag:
 					EditFlags();
 					break;
 				case Editable.Level_and_EXP:

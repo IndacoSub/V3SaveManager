@@ -149,6 +149,8 @@
 			Controls.Add(FileInfoTextArchive);
 			Controls.Add(FileInfoWRDFile);
 			Controls.Add(FileInfoWRDArchive);
+			MaximumSize = new Size(960, 359);
+			MinimumSize = new Size(960, 359);
 			Name = "FilesEditor";
 			Text = "FilesEditor";
 			ResumeLayout(false);

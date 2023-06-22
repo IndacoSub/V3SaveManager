@@ -83,6 +83,8 @@
 			Controls.Add(CurrentSFX);
 			Controls.Add(CurrentBGM);
 			Controls.Add(BGMIndex);
+			MaximumSize = new Size(344, 389);
+			MinimumSize = new Size(344, 389);
 			Name = "AudioEditor";
 			Text = "AudioEditor";
 			ResumeLayout(false);

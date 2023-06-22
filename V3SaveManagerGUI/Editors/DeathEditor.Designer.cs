@@ -203,6 +203,8 @@
 			Controls.Add(StatusKaito);
 			Controls.Add(StatusShuichi);
 			Controls.Add(SetButton);
+			MaximumSize = new Size(1096, 436);
+			MinimumSize = new Size(1096, 436);
 			Name = "DeathEditor";
 			Text = "DeathEditor";
 			ResumeLayout(false);
