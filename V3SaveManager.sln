@@ -6,9 +6,10 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "V3SaveManager", "V3SaveManager\V3SaveManager.csproj", "{83B9043F-FEF2-4EDD-8647-5337A17F1BFE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "V3SaveManagerGUI", "V3SaveManagerGUI\V3SaveManagerGUI.csproj", "{409A82F7-5681-4B92-B994-D5635168A2AE}"
-	ProjectSection(ProjectDependencies) = postProject
-		{83B9043F-FEF2-4EDD-8647-5337A17F1BFE} = {83B9043F-FEF2-4EDD-8647-5337A17F1BFE}
-	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "V3SaveManager.Core", "V3SaveManager.Core\V3SaveManager.Core.csproj", "{B424100F-E3C9-43A2-A1FA-17EE87DE65AB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "V3SaveManager.Tests", "V3SaveManager.Tests\V3SaveManager.Tests.csproj", "{DDC1793D-EF3D-4B43-9E1B-0FCE2A559C12}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -24,6 +25,14 @@ Global
 		{409A82F7-5681-4B92-B994-D5635168A2AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{409A82F7-5681-4B92-B994-D5635168A2AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{409A82F7-5681-4B92-B994-D5635168A2AE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B424100F-E3C9-43A2-A1FA-17EE87DE65AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B424100F-E3C9-43A2-A1FA-17EE87DE65AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B424100F-E3C9-43A2-A1FA-17EE87DE65AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B424100F-E3C9-43A2-A1FA-17EE87DE65AB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DDC1793D-EF3D-4B43-9E1B-0FCE2A559C12}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DDC1793D-EF3D-4B43-9E1B-0FCE2A559C12}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DDC1793D-EF3D-4B43-9E1B-0FCE2A559C12}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DDC1793D-EF3D-4B43-9E1B-0FCE2A559C12}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

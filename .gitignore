@@ -9,6 +9,7 @@
 *.editorconfig
 *.exe
 *.json
+!global.json
 *.lock
 *.pdb
 *.props
@@ -27,3 +28,7 @@ V3SaveManagerGUI/obj/*
 V3SaveManager/Properties/PublishProfiles/*
 V3SaveManagerGUI/Properties/PublishProfiles/*
 V3SaveManager/bin/*
+
+# Build artifacts from every solution project.
+**/bin/
+**/obj/

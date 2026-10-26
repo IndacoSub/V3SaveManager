@@ -1,0 +1,170 @@
+namespace V3SaveManager.Core;
+
+/// <summary>The original fixed-width layout, in serialization order (including unknown blocks).</summary>
+public static class SaveSchema
+{
+    public static IReadOnlyList<SaveField> Fields { get; }
+    public static int Size { get; }
+    private static readonly IReadOnlyDictionary<string, SaveField> ByName;
+
+    static SaveSchema()
+    {
+        var fields = new List<SaveField>();
+        int offset = 0;
+        void Add(string name, int length, ValueFormat format, string category)
+        {
+            fields.Add(new SaveField(name, offset, length, format, category));
+            offset = checked(offset + length);
+        }
+        Add("GameName", 0x80, ValueFormat.Utf8, "Summary");
+        Add("ChapterName", 0x80, ValueFormat.Utf8, "Summary");
+        Add("SaveDetails", 0x400, ValueFormat.Utf8, "Summary");
+        Add("NewSaveData", 0x80, ValueFormat.Utf8, "Summary");
+        Add("Unk1", 4, ValueFormat.Hex, "Unknown");
+        Add("Unk2", 4, ValueFormat.Hex, "Unknown");
+        Add("Unk3", 4, ValueFormat.Hex, "Unknown");
+        Add("Unk4", 4, ValueFormat.Hex, "Unknown");
+        Add("Monocoins", 2, ValueFormat.Int16, "Currency");
+        Add("Unk5", 2, ValueFormat.Hex, "Unknown");
+        Add("Unk6", 4, ValueFormat.Hex, "Unknown");
+        Add("Unk7", 4, ValueFormat.Hex, "Unknown");
+        Add("Unk8", 4, ValueFormat.Hex, "Unknown");
+        Add("PlayTime", 8, ValueFormat.Int64, "Progress");
+        Add("Unk9", 8, ValueFormat.Hex, "Unknown");
+        Add("ToDo1", 0x28, ValueFormat.Hex, "Unknown");
+        Add("BGMVolume", 2, ValueFormat.Int16, "Settings");
+        Add("SFXVolume", 2, ValueFormat.Int16, "Settings");
+        Add("VoicesVolume", 2, ValueFormat.Int16, "Settings");
+        Add("ReticleSpeed", 2, ValueFormat.Int16, "Settings");
+        Add("MovementBob", 2, ValueFormat.Int16, "Settings");
+        Add("Controls", 2, ValueFormat.Int16, "Settings");
+        Add("LookInvert", 2, ValueFormat.Int16, "Settings");
+        Add("TextSpeed", 2, ValueFormat.Int16, "Settings");
+        Add("MapDisplay", 2, ValueFormat.Int16, "Settings");
+        Add("Setting1", 2, ValueFormat.Int16, "Settings");
+        Add("LogicDifficulty", 2, ValueFormat.Int16, "Settings");
+        Add("ActionDifficulty", 2, ValueFormat.Int16, "Settings");
+        Add("IsContinueEnabled", 2, ValueFormat.Int16, "Settings");
+        Add("GameClearFlg", 2, ValueFormat.Int16, "Settings");
+        Add("ToDo2", 0x238C, ValueFormat.Hex, "Unknown");
+        Add("Unk10", 4, ValueFormat.Hex, "Unknown");
+        Add("CurrentLevel", 4, ValueFormat.Int32, "Progress");
+        Add("TotalEXP", 4, ValueFormat.Int32, "Progress");
+        Add("Unk11", 4, ValueFormat.Hex, "Unknown");
+        Add("Unk12", 4, ValueFormat.Hex, "Unknown");
+        Add("CurrentLevelShort", 2, ValueFormat.Int16, "Progress");
+        Add("Unk13", 2, ValueFormat.Hex, "Unknown");
+        Add("Unk14", 0x21C, ValueFormat.Hex, "Unknown");
+        Add("MapPositionX", 4, ValueFormat.Float32, "Map");
+        Add("MapPositionY", 4, ValueFormat.Float32, "Map");
+        Add("Unk15", 4, ValueFormat.Hex, "Unknown");
+        Add("ToDo3", 0x784, ValueFormat.Hex, "Unknown");
+        Add("IsStatusAlive", 4, ValueFormat.UInt32, "Characters");
+        Add("IsStatusUnknown", 4, ValueFormat.UInt32, "Characters");
+        Add("ToDo4", 0xF0, ValueFormat.Hex, "Unknown");
+        Add("MonopadTheme", 4, ValueFormat.Int32, "Settings");
+        Add("BeforeText", 0xC, ValueFormat.Hex, "Unknown");
+        Add("BacklogText", 0x4000, ValueFormat.Utf8, "Files and text");
+        Add("ToDo5", 0x400C, ValueFormat.Hex, "Unknown");
+        Add("CasinoCoins", 4, ValueFormat.Int32, "Currency");
+        Add("Unk16", 0xE0, ValueFormat.Hex, "Unknown");
+        Add("GDeathCardMachine", 4, ValueFormat.Int32, "Settings");
+        Add("Unk17", 0x20, ValueFormat.Hex, "Unknown");
+        Add("Unk18", 0x5DD0, ValueFormat.Hex, "Unknown");
+        Add("Unk19", 0x8CD0, ValueFormat.Hex, "Unknown");
+        Add("Unk20", 0x3F0, ValueFormat.Hex, "Unknown");
+        Add("Unk21", 0x1410, ValueFormat.Hex, "Unknown");
+        Add("Unk22", 0xFD30, ValueFormat.Hex, "Unknown");
+        Add("Unk23", 0x180, ValueFormat.Hex, "Unknown");
+        Add("Unk24", 0xE90, ValueFormat.Hex, "Unknown");
+        Add("Unk25", 0x1AE0, ValueFormat.Hex, "Unknown");
+        Add("Unk26", 0x190, ValueFormat.Hex, "Unknown");
+        Add("Unk27", 0x240, ValueFormat.Hex, "Unknown");
+        Add("Unk28", 0x2140, ValueFormat.Hex, "Unknown");
+        Add("Unk29", 4, ValueFormat.Hex, "Unknown");
+        Add("Unk30", 4, ValueFormat.Hex, "Unknown");
+        Add("Unk31", 4, ValueFormat.Hex, "Unknown");
+        Add("WRDArchive", 0x40, ValueFormat.Utf8, "Files and text");
+        Add("SubroutineArchive", 0x40, ValueFormat.Utf8, "Files and text");
+        Add("Unk32", 0x40, ValueFormat.Hex, "Unknown");
+        Add("Unk33", 0x40, ValueFormat.Hex, "Unknown");
+        Add("Unk34", 0x40, ValueFormat.Hex, "Unknown");
+        Add("WRDFile", 0x40, ValueFormat.Utf8, "Files and text");
+        Add("SubroutineWRD", 0x40, ValueFormat.Utf8, "Files and text");
+        Add("Unk35", 0x40, ValueFormat.Hex, "Unknown");
+        Add("Unk36", 0x40, ValueFormat.Hex, "Unknown");
+        Add("Unk37", 0x40, ValueFormat.Hex, "Unknown");
+        Add("TextArchive", 0x40, ValueFormat.Utf8, "Files and text");
+        Add("SubroutineTextArchive", 0x40, ValueFormat.Utf8, "Files and text");
+        Add("Unk38", 0x40, ValueFormat.Hex, "Unknown");
+        Add("Unk39", 0x40, ValueFormat.Hex, "Unknown");
+        Add("Unk40", 0x40, ValueFormat.Hex, "Unknown");
+        Add("TextSTX", 0x40, ValueFormat.Utf8, "Files and text");
+        Add("SubroutineSTX", 0x40, ValueFormat.Utf8, "Files and text");
+        Add("Unk41", 0x40, ValueFormat.Hex, "Unknown");
+        Add("Unk42", 0x40, ValueFormat.Hex, "Unknown");
+        Add("Unk43", 0x40, ValueFormat.Hex, "Unknown");
+        Add("WRDMap", 0x40, ValueFormat.Utf8, "Files and text");
+        Add("Unk44", 0x100, ValueFormat.Hex, "Unknown");
+        Add("Unk45", 0x80, ValueFormat.Hex, "Unknown");
+        Add("Unk46", 0x1004, ValueFormat.Hex, "Unknown");
+        Add("CurrentMapID", 2, ValueFormat.Int16, "Map");
+        Add("Unk47", 0xE2, ValueFormat.Hex, "Unknown");
+        Add("BGMIndex", 4, ValueFormat.Int32, "Audio");
+        Add("Unk48", 2, ValueFormat.Hex, "Unknown");
+        Add("Unk49", 2, ValueFormat.Hex, "Unknown");
+        Add("CurrentBGM", 0x10, ValueFormat.Utf8, "Files and text");
+        Add("Unk50", 0x18, ValueFormat.Hex, "Unknown");
+        Add("CurrentSFX", 0x10, ValueFormat.Utf8, "Files and text");
+        Add("CurrentSFX_Again", 0x10, ValueFormat.Utf8, "Files and text");
+        Add("Unk51", 0x20, ValueFormat.Hex, "Unknown");
+        Add("Unk52", 0x10, ValueFormat.Hex, "Unknown");
+        Add("Unk53", 0x28, ValueFormat.Hex, "Unknown");
+        Add("CurrentLine", 2, ValueFormat.Int16, "Files and text");
+        Add("Unk54", 0x2E2, ValueFormat.Hex, "Unknown");
+        Add("Unk55", 4, ValueFormat.Hex, "Unknown");
+        Add("Unk56", 4, ValueFormat.Hex, "Unknown");
+        Add("Unk57", 4, ValueFormat.Hex, "Unknown");
+        Add("Unk58", 4, ValueFormat.Hex, "Unknown");
+        Add("Unk59", 4, ValueFormat.Hex, "Unknown");
+        Add("Unk60", 4, ValueFormat.Hex, "Unknown");
+        Add("Unk61", 0xC, ValueFormat.Hex, "Unknown");
+        Add("Voiceline1", 0x40, ValueFormat.Utf8, "Files and text");
+        Add("Voiceline2", 0x40, ValueFormat.Utf8, "Files and text");
+        Add("Voiceline3", 0x40, ValueFormat.Utf8, "Files and text");
+        Add("Voiceline4", 0x40, ValueFormat.Utf8, "Files and text");
+        Add("Voiceline5", 0x40, ValueFormat.Utf8, "Files and text");
+        Add("Voiceline6", 0x40, ValueFormat.Utf8, "Files and text");
+        Add("Voiceline7", 0x40, ValueFormat.Utf8, "Files and text");
+        Add("Voiceline8", 0x40, ValueFormat.Utf8, "Files and text");
+        Add("Voiceline9", 0x40, ValueFormat.Utf8, "Files and text");
+        Add("Voiceline10", 0x40, ValueFormat.Utf8, "Files and text");
+        Add("Voiceline11", 0x40, ValueFormat.Utf8, "Files and text");
+        Add("Voiceline12", 0x40, ValueFormat.Utf8, "Files and text");
+        Add("Voiceline13", 0x40, ValueFormat.Utf8, "Files and text");
+        Add("Voiceline14", 0x40, ValueFormat.Utf8, "Files and text");
+        Add("Voiceline15", 0x40, ValueFormat.Utf8, "Files and text");
+        Add("Voiceline16", 0x40, ValueFormat.Utf8, "Files and text");
+        Add("Unk62", 0x4C, ValueFormat.Hex, "Unknown");
+        Add("Unk63", 0x10D0, ValueFormat.Hex, "Unknown");
+        Add("Unk64", 0x2DB0, ValueFormat.Hex, "Unknown");
+        Add("CurrentMapID_Again", 2, ValueFormat.Int16, "Map");
+        Add("Unk65", 0x4E, ValueFormat.Hex, "Unknown");
+        Add("Unk66", 0x270, ValueFormat.Hex, "Unknown");
+        Add("Unk67", 0xCE58, ValueFormat.Hex, "Unknown");
+        Add("VoiceLanguageEnglish", 4, ValueFormat.Int32, "Settings");
+        Add("Setting2", 4, ValueFormat.Int32, "Settings");
+        Add("InvertX", 4, ValueFormat.Int32, "Settings");
+        Add("DateFormat", 4, ValueFormat.Int32, "Settings");
+        Add("Unk68", 4, ValueFormat.Hex, "Unknown");
+        Add("Unk69", 4, ValueFormat.Hex, "Unknown");
+        Add("Unk70", 0xF54, ValueFormat.Hex, "Unknown");
+        Add("LastBytes", 4, ValueFormat.Hex, "Unknown");
+        Fields = fields.AsReadOnly();
+        Size = offset;
+        ByName = fields.ToDictionary(field => field.Name, StringComparer.OrdinalIgnoreCase);
+    }
+
+    public static SaveField GetField(string name) =>
+        ByName.TryGetValue(name, out var field) ? field : throw new ArgumentException($"Unknown save field '{name}'.", nameof(name));
+}
